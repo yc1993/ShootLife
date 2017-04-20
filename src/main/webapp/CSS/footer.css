@@ -1,0 +1,208 @@
+.footer {
+  background: #ffffff;
+  height: 80px;
+  width: 100%;
+  font-family: \5FAE\8F6F\96C5\9ED1;
+  font-size: 14px;
+  color: #b5b5b5;
+  overflow: hidden;
+}
+.footer a {
+  color: #b5b5b5;
+  text-decoration: none;
+}
+.footer .f_top {
+  height: 60px;
+  width: 100%;
+  background: #626262;
+  line-height: 60px;
+  overflow: hidden;
+}
+.footer .f_top .tp {
+  width: 1000px;
+  margin: 0 auto;
+}
+.footer .f_top .tp .nav {
+  width: 980px;
+  height: 60px;
+  overflow: hidden;
+  margin-left: 29px;
+}
+.footer .f_top .tp .nav a {
+  float: left;
+  margin: 0 8px;
+}
+.footer .f_top .tp .nav span {
+  float: left;
+  color: #b5b5b5;
+  font-size: 12px;
+}
+.footer .f_top .tp .nav span:first {
+  margin-left: 10px;
+}
+.footer .f_top .tp .nav .member {
+  margin-left: 20px;
+}
+.footer .f_bottom {
+  height: 311px;
+  width: 1000px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.footer .f_bottom .f_left {
+  width: 322px;
+  height: 311px;
+  background: #343333;
+  float: left;
+}
+.footer .f_bottom .f_left .fl_top {
+  width: 265px;
+  height: 70px;
+  margin: 32px auto;
+}
+.footer .f_bottom .f_left .fl_top .bemail {
+  width: 70px;
+  height: 70px;
+  background: url("../img/ifoot.png") no-repeat -398px 0;
+  -background: url("../img/ifoot.gif") no-repeat -398px 0;
+  float: left;
+}
+.footer .f_bottom .f_left .fl_top .f_font {
+  float: right;
+  width: 190px;
+  height: 70px;
+}
+.footer .f_bottom .f_left .fl_top .f_font span {
+  width: 190px;
+  line-height: 20px;
+}
+.footer .f_bottom .f_left .fl_top .f_font .e_email {
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 28px;
+}
+.footer .f_bottom .f_left .fl_bottom {
+  width: 265px;
+  height: 144px;
+  margin: 50px auto 0px;
+  overflow: hidden;
+}
+.footer .f_bottom .f_left .fl_bottom .b_weibo {
+  width: 104px;
+  float: right;
+  overflow: hidden;
+}
+.footer .f_bottom .f_left .fl_bottom .b_weibo .w_bg {
+  width: 104px;
+  height: 106px;
+  background: url("../img/ifoot.png") no-repeat -102px 0;
+  -background: url("../img/ifoot.gif") no-repeat -102px 0;
+}
+.footer .f_bottom .f_left .fl_bottom .b_weibo .w_font {
+  height: 30px;
+  margin-top: 4px;
+}
+.footer .f_bottom .f_left .fl_bottom .b_weibo .w_font .small_wb {
+  width: 36px;
+  height: 30px;
+  display: block;
+  background: url("../img/ifoot.png") no-repeat -38px -107px;
+  -background: url("../img/ifoot.gif") no-repeat -38px -107px;
+  float: left;
+}
+.footer .f_bottom .f_left .fl_bottom .b_weibo .w_font .zt_w {
+  float: right;
+  line-height: 30px;
+}
+.footer .f_bottom .f_left .fl_bottom .b_weixin {
+  width: 104px;
+  float: left;
+}
+.footer .f_bottom .f_left .fl_bottom .b_weixin .w_bg {
+  background: url("../img/ifoot.png") no-repeat 0px 0px;
+  -background: url("../img/ifoot.gif") no-repeat 0px 0px;
+  width: 104px;
+  height: 106px;
+
+}
+.footer .f_bottom .f_left .fl_bottom .b_weixin .w_font .small_wb {
+  background: url("../img/ifoot.png") no-repeat 0 -107px;
+  -background: url("../img/ifoot.gif") no-repeat 0 -107px;
+}
+.footer .f_bottom .f_right {
+  width: 605px;
+  height: 250px;
+  overflow: hidden;
+  float: left;
+  margin-left: 57px;
+  margin-top: 35px;
+}
+.footer .f_bottom .f_right .r_1 {
+  width: 605px;
+  height: 30px;
+  overflow: hidden;
+  background: #343333;
+  border-radius: 15px;
+}
+.footer .f_bottom .f_right .r_1 span {
+  float: left;
+  line-height: 30px;
+  margin-left: 10px;
+}
+.footer .f_bottom .f_right .r_1 .tel {
+  width: 20px;
+  height: 26px;
+  overflow: hidden;
+  background: url("../img/ifoot.png") no-repeat -76px -109px;
+  -background: url("../img/ifoot.gif") no-repeat -76px -109px;
+  margin-left: 20px;
+  margin-top: 3px;
+}
+.footer .f_bottom .f_right .r_1 .qq {
+  width: 20px;
+  height: 26px;
+  overflow: hidden;
+  background: url("../img/ifoot.png") no-repeat -101px -109px;
+  -background: url("../img/ifoot.gif") no-repeat -101px -109px;
+  margin-left: 20px;
+  margin-top: 3px;
+}
+.footer .f_bottom .f_right .r_2 {
+  width: 605px;
+  margin-top: 40px;
+  height: 60px;
+  overflow: hidden;
+}
+.footer .f_bottom .f_right .r_2 span {
+  height: 30px;
+  width: 605px;
+  overflow: hidden;
+  text-align: center;
+  display: block;
+}
+.footer .f_bottom .f_right .r_3 {
+  width: 245px;
+  height: 85px;
+  margin: 35px auto 0px;
+  overflow: hidden;
+}
+.footer .f_bottom .f_right .r_3 .wx {
+  width: 120px;
+  height: 51px;
+  overflow: hidden;
+  background: url("../img/ifoot.png") no-repeat -226px -2px;
+  -background: url("../img/ifoot.gif") no-repeat -226px -2px;
+  display: block;
+  float: left;
+  margin-top: 20px;
+}
+.footer .f_bottom .f_right .r_3 .wj {
+  width: 78px;
+  height: 81px;
+  overflow: hidden;
+  background: url("../img/ifoot.png") no-repeat -245px -57px;
+  -background: url("../img/ifoot.gif") no-repeat -245px -57px;
+  display: block;
+  float: right;
+}
+/*# sourceMappingURL=all.css.map */x

@@ -1,0 +1,35 @@
+/*图片内容*/
+#tc_photo .big-pic{ text-align:center; position: relative; overflow: hidden;}
+#tc_photo .big-pic #big-pic{display:table-cell;vertical-align:middle;*display:block; overflow:hidden;*font-size:480px; width:960px;}
+.photo_prev{position:absolute;left:0;top:0;width:50%;height:100%;z-index:100}
+.photo_next{ position:absolute; right:0; top:0; width:50%; height:100%; z-index:100}
+.photo_prev a,.photo_next a{background-image: url(../images/blank.gif);display:block; width:100%; height:100%; outline:none;}
+#endSelect{top:50%;left:50%;position: absolute; width:360px;height:410px; margin: -180px 0 0 -205px; border:1px solid #8a8a8a;display:none;z-index:200;}
+#endSelect .bg{height:100%;width:100%;background:#000;filter:Alpha(Opacity=50);opacity:0.5;}
+#endSelect .E_Cont{position:absolute;top:10px;left:95px;color:#fff;font-size:14px;}
+#endSelect .E_Cont p{padding:4px 0;zoom:1;overflow:hidden;}
+#rePlayBut,#nextPicsBut,#endSelect #endSelClose{background:url(../images/v9/big-btn.png) no-repeat}
+#rePlayBut{float:left;width:69px;height:23px;background-position: 0px -167px;}
+#nextPicsBut{float:left;width:97px;height:23px;background-position: -100px -167px;margin-left:10px;}
+#endSelect #endSelClose{background-position: 0px -217px;position:absolute;top:3px;right:3px;cursor:pointer;width:11px;height:11px;overflow:hidden;z-index:2;}
+.photo_prev a{cursor:url(http://www.heiguang.com/statics/images/arr_left.cur), auto;}
+.photo_next a{cursor:url(http://www.heiguang.com/statics/images/arr_right.cur), auto;}
+/*图库新显示模式*/
+#tc_title{background-color: #606060; padding-top: 20px;}
+#tc_photo {background-color: #606060;}
+#tc_photo .pp{margin: 0 auto; color: #fff; padding-top: 40px;}
+#tc_photo .pp a{color: #fff;}
+#tc_title h1{font-size: 20px; line-height: 40px; color: #fff;text-align: center;}
+#tc_title h2{font-size: 14px; line-height: 40px; color: #cccccc; text-align: center;}
+#imageWrapper{background-color: #4e4e4e;padding: 15px 0px;}
+#imageWrapper #tc_photo{background-color:#4e4e4e; }
+#imageWrapper_title{height: 36px; padding-bottom: 12px; padding-top: 20px;}
+#imageWrapper_title .show_logo{float: left; width:132px; height: 32px;}
+#imageWrapper_title .path{width: 400px; height: 32px; line-height: 32px; float: left; font-size:18px;}
+#imageWrapper_title .explode a{color:red; padding-left: 15px;}
+#imageWrapper_title .explode,#imageWrapper_title .tip{float: right; height: 32px; line-height: 32px;}
+.tl_baidu{text-align: center; padding: 8px 0px;}
+.tk_row .col_7{padding-top: 10px;}
+#tk_share{position: relative;}
+#bdshare{position: absolute;top:-144px;right:0px;}
+#tk_huaban{position: absolute;top:-45px; right: 0px;}

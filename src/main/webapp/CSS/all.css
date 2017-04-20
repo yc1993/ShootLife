@@ -1,0 +1,165 @@
+#tk_top_nav {
+  height: 36px;
+  line-height: 36px;
+  border-bottom: 1px #dfdfdf solid;
+}
+#tk_top_nav .sites a.f09 {
+  color: red;
+  font-weight: 700;
+}
+#tk_header .logo {
+  float: left;
+  _display: inline;
+  position: absolute;
+  left: 0px;
+  top: 15px;
+  width: 201px;
+  height: 65px;
+}
+#tk_header #tu_search {
+  display: inline;
+  float: right;
+  width: 300px;
+  height: 34px;
+  overflow: hidden;
+  background: none;
+  margin: 34px 0 0;
+  border: 1px solid #5a5a5a;
+}
+#tk_header #tu_search .ipt_btn {
+  display: inline;
+  float: right;
+  width: 70px;
+  height: 34px;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: #5a5a5a;
+  color: #fff;
+  font-size: 16px;
+}
+#tk_header #tu_search .ipt_txt {
+  display: inline;
+  float: left;
+  width: 220px;
+  height: 34px;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  line-height: 34px;
+  text-indent: 15px;
+  outline: 0;
+}
+#main_nav {
+  height: 45px;
+  line-height: 45px;
+  background: #f2f2f2;
+  border-bottom: 1px #e9e9e9 solid;
+  border-top: 1px #e9e9e9 solid;
+}
+#main_nav .tk_row {
+  overflow: hidden;
+}
+#main_nav .tk_row #tk_nav {
+  width: 110%;
+  margin: 0;
+  padding: 0;
+  height: 45px;
+  line-height: 45px;
+}
+#main_nav .tk_row #tk_nav a {
+  display: block;
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: 107px;
+  height: 45px;
+  line-height: 45px;
+  font-family: "Microsoft Yahei", Arial;
+  font-size: 16px;
+  text-align: center;
+  color: #545454;
+  font-weight: normal;
+  background: none;
+  text-decoration: none;
+}
+#main_nav .tk_row #tk_nav a.f88,
+#main_nav .tk_row #tk_nav a:hover {
+  background: #f81668;
+  color: #fff;
+}
+#imageWrapper_title {
+  height: 36px;
+  line-height: 36px;
+  background: #f6f6f6;
+  padding: 0;
+}
+#imageWrapper_title .tip {
+  float: right;
+  margin-right: 10px;
+  *margin-top: 5px;
+  -margin-top: 3px;
+}
+#imageWrapper_title .path {
+  font-family: "Microsoft Yahei", Arial;
+  font-size: 14px;
+  margin-left: 15px;
+  line-height: 36px;
+}
+#imageWrapper_title .explode {
+  font-family: "Microsoft Yahei", Arial;
+  -width: 130px;
+  font-size: 14px;
+  margin-right: 15px;
+  line-height: 36px;
+  color: #797979;
+}
+#imageWrapper_title .explode a {
+  color: #797979;
+  display: block;
+  height: 36px;
+  overflow: hidden;
+  padding: 0;
+}
+#imageWrapper_title .explode a span {
+  float: left;
+}
+#imageWrapper_title .explode a .look_dk {
+  width: 18px;
+  height: 36px;
+  margin-left: 5px;
+  display: block;
+  background: url("../img/button_tk.png") no-repeat 0 11px;
+}
+#imageWrapper_title .explode .load_zk {
+  cursor: pointer;
+}
+#imageWrapper_title .explode .load_zk span {
+  float: left;
+}
+#imageWrapper_title .explode .load_zk .look_yt {
+  width: 18px;
+  height: 36px;
+  margin-left: 5px;
+  display: block;
+  background: url("../img/button_tk.png") no-repeat -18px center;
+}
+#imageWrapper_title .explode a .look_dl {
+  width: 18px;
+  height: 36px;
+  margin-left: 5px;
+  display: block;
+  background: url("../img/button_tk.png") no-repeat -35px 11px;
+}
+
+#tk_nav a#hr span.hot {
+    position: absolute;
+    width: 22px;
+    height: 10px;
+    right: 4px;
+	top:0px;
+}
+/*# sourceMappingURL=all.css.map */
