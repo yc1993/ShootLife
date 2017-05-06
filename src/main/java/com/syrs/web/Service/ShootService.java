@@ -127,7 +127,7 @@ public class ShootService {
 	
 	// 返回新闻列表
 	public List<NewsListModel> backNewsList(Integer section, Integer count) {  //num表示第几页
-		String sqlString = "SELECT * FROM news_list ORDER BY ID DESC LIMIT " + section + "," + count + ";";
+		String sqlString = "SELECT * FROM news_list ORDER BY ID DESC LIMIT " + (section * 12) + "," + count + ";";
 		Connection conn = searchDAO.getConnection("jdbc:mysql://" + mysqlIp, "root", "web123");
 		return searchDAO.allNews(sqlString, conn);
 	}

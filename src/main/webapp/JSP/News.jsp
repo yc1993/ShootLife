@@ -99,14 +99,14 @@
 				<c:forEach items="${targetList }" var="targetModel" varStatus="status">
 					<c:choose>
 						<c:when test="${status.index == 0 }">
-							<a href="main.do" target="_blank" id="${targetModel.getId() }" class="${targetModel.getClazz() }">${targetModel.getTarget() }</a>
+							<a href="main.do" target="_self" id="${targetModel.getId() }" class="${targetModel.getClazz() }">${targetModel.getTarget() }</a>
 						</c:when>
 						<c:otherwise>
-							<a href="main.do?target=${status.index }" target="_blank" id="${targetModel.getId() }" class="${targetModel.getClazz() }">${targetModel.getTarget() }</a>
+							<a href="main.do?target=${status.index }" target="_self" id="${targetModel.getId() }" class="${targetModel.getClazz() }">${targetModel.getTarget() }</a>
 						</c:otherwise>	
 					</c:choose>
 				</c:forEach>
-				<a href="news.do" target="_blank" id="newsMenu" class="f88">热点新闻</a>
+				<a href="news.do" target="_self" id="newsMenu" class="f88">热点新闻</a>
 			</div>
 		</div>
 	</div>
@@ -120,12 +120,12 @@
 					<c:forEach items="${newsList}" var="news">
 						<div class="content" style="display: block;height: 180px;">
 						<div class="col-sm-4">
-							<a href="readNews.do?id=${news.getId()}&createTime=${news.getCreateTime()}&title=${news.getTitle()}" target="_blank">
+							<a href="readNews.do?id=${news.getId()}&createTime=${news.getCreateTime()}&title=${news.getTitle()}" target="_self">
 								<img alt="image" src="${MyIP}${news.getImgPath()}" style="height: 170px;width: 170px;">
 							</a>
 						</div>
 						<div class="col-sm-8">
-							<a href="readNews.do?id=${news.getId()}&createTime=${news.getCreateTime()}&title=${news.getTitle()}" target="_blank">
+							<a href="readNews.do?id=${news.getId()}&createTime=${news.getCreateTime()}&title=${news.getTitle()}" target="_self">
 								<h4 style="color: black;">${news.getTitle()}<br><br><small><fmt:formatDate value="${news.getCreateTime()}" pattern="yyyy-MM-dd HH:mm:ss"/></small></h4>
 							</a>
 						</div>
@@ -250,13 +250,13 @@
 			</div>
 			<div class="grand">
 				<div class="website">
-					·<a href="main.do?target=1" target="_blank">化妆造型</a>
-					·<a href="main.do?target=1" target="_blank">婚纱摄影</a>
-					·<a href="main.do?target=1" target="_blank">写真摄影</a>
+					·<a href="main.do?target=1" target="_self">化妆造型</a>
+					·<a href="main.do?target=1" target="_self">婚纱摄影</a>
+					·<a href="main.do?target=1" target="_self">写真摄影</a>
 
-					·<a href="main.do?target=1" target="_blank">明星图片</a> ·<a
-						href="main.do?target=1" target="_blank">高清壁纸图片</a> 
-					·<a href="main.do?target=3" target="_blank">搞笑图片</a>
+					·<a href="main.do?target=1" target="_self">明星图片</a> ·<a
+						href="main.do?target=1" target="_self">高清壁纸图片</a> 
+					·<a href="main.do?target=3" target="_self">搞笑图片</a>
 					<a
 						href="http://wpa.qq.com/msgrd?v=3&amp;uin=1392892351&amp;site=qq&amp;menu=yes"
 						target="_blank" rel="nofollow">申请友链点击qq:1392892351</a>
@@ -271,7 +271,7 @@
 		<div class="f_top">
 			<div class="tp">
 				<div class="nav">
-					<a href="main.do" target="_blank" title="柚柚网">柚柚网</a>
+					<a href="main.do" target="_self" title="柚柚网">柚柚网</a>
 					<span>|</span>  
 					<script src="https://s95.cnzz.com/z_stat.php?id=1261349182&web_id=1261349182" language="JavaScript"></script>
 				</div>

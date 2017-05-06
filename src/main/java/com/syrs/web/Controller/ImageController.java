@@ -63,8 +63,6 @@ public class ImageController {
 //		request.setAttribute("user1", user1);
 		
 		
-		System.out.println(request.getAttribute("count"));
-		System.out.println();
 		if (request.getAttribute("count") != null) {
 			
 			return "JSP/first.jsp";
@@ -120,7 +118,7 @@ public class ImageController {
 			ArrayList<MainImgShowModel> imgList = (ArrayList<MainImgShowModel>) shootService.backMainAllImgList();
 			mav.getModelMap().put("modelList", imgList);
 			
-			List<NewsListModel> newsList = shootService.backNewsList(0, 4);
+			List<NewsListModel> newsList = shootService.backNewsList(0, 6);
 			
 			List<NewsListModel> randNewsList = shootService.randTitleList(4);
 			mav.getModelMap().put("newsList", newsList);
@@ -344,9 +342,9 @@ public class ImageController {
 
 		int nowSection = (sectionStr == null)?0:Integer.parseInt(sectionStr);
 		List<NewsListModel> newsList = shootService.backNewsList(nowSection, 12);
-		
+
 		//随机新闻（右边显示）
-		List<NewsListModel> randNewsTitle = shootService.randTitleList(3);
+		List<NewsListModel> randNewsTitle = shootService.randTitleList(6);
 		
 		//新闻条数
 		Integer newsCount = shootService.backNewsCount();
@@ -416,7 +414,6 @@ public class ImageController {
 	
 	@RequestMapping(value="push", method=RequestMethod.POST)
 	public String push(HttpSession session ,ModelMap map, HttpServletRequest request,String title, String iconUrl, String[] content, String[] url){
-		System.out.println("title:" + title + " iconUrl:" + iconUrl );
 		if (content != null && content.length > 0) {
 			for (String string : content) {
 				System.out.println("content:" + string);

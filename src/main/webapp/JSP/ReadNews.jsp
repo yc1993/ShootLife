@@ -23,6 +23,11 @@
 <script type="text/javascript" src="JS/jquery-3.2.1.min.js"></script>
 
 <style>
+img {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 .backToTop {
 	display: none;
 	z-index: 2000;
