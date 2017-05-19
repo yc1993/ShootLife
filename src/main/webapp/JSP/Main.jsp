@@ -164,31 +164,7 @@
 					<c:choose>
 						<c:when test="${status.index < 8 }">
 							<c:if test="${status.index == 0 }">
-									<!-- 新闻 -->
-	<div id="ycDiv0" class="Column">
-		<label class="lable1">热门新闻</label><label class="lable2">/NEWS</label>
-	</div>
-	<div class="row" >
-		
-		<div class="col-sm-6">
-			<div class="row">
-				<c:forEach items="${randNewsList}" var="randNews">
-					<div class="col-sm-5" style="margin-right: 30px;margin-bottom: 30px;">
-						<a href="readNews.do?id=${randNews.getId()}&createTime=${randNews.getCreateTime()}&title=${randNews.getTitle()}">
-							<img alt="图片" src="${MyIP}${randNews.imgPath}" style="height: 200px;width: 200px;">
-						</a>
-						<div style="width: 100%;position: absolute;height: 45px;bottom: 0px;z-index: 3;left: 0px;color: #fff;background-color: #333;opacity:0.7;">${randNews.title}</div>
-					</div>
-				</c:forEach>
-				
-			</div>
-		</div>
-		<div class="col-sm-6">
-			<c:forEach items="${newsList}" var="news">
-				<a href="readNews.do?id=${news.getId()}&createTime=${news.getCreateTime()}&title=${news.getTitle()}"><p class="news">•&nbsp;${news.title}</p></a>
-			</c:forEach>
-		</div>
-	</div>
+	
 								<div id="ycDiv1" class="Column"><label class="lable1">写真摄影</label><label class="lable2">/PHOTO</label></div>
 							</c:if>
 							<c:if test="${status.count % 4 == 0 }">
@@ -220,6 +196,31 @@
 								</dd>
 							</c:if>
 							<c:if test="${status.index == 7 }">
+																<!-- 新闻 -->
+	<div id="ycDiv0" class="Column">
+		<label class="lable1">热门新闻</label><label class="lable2">/NEWS</label>
+	</div>
+	<div class="row" >
+		
+		<div class="col-sm-6">
+			<div class="row">
+				<c:forEach items="${randNewsList}" var="randNews">
+					<div class="col-sm-5" style="margin-right: 30px;margin-bottom: 30px;">
+						<a href="readNews.do?id=${randNews.getId()}&createTime=${randNews.getCreateTime()}&title=${randNews.getTitle()}">
+							<img alt="图片" src="${MyIP}${randNews.imgPath}" style="height: 150px;width: 200px;">
+						</a>
+						<div style="width: 100%;position: absolute;height: 45px;bottom: 0px;z-index: 3;left: 0px;color: #fff;background-color: #333;opacity:0.7;">${randNews.title}</div>
+					</div>
+				</c:forEach>
+				
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<c:forEach items="${newsList}" var="news">
+				<a href="readNews.do?id=${news.getId()}&createTime=${news.getCreateTime()}&title=${news.getTitle()}"><p class="news">•&nbsp;${news.title}</p></a>
+			</c:forEach>
+		</div>
+	</div>
 								<div id="ycDiv2" class="Column"><label class="lable1">每日一漫</label><label class="lable2">/CARTOON</label></div>
 							</c:if>
 						</c:when>

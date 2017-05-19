@@ -121,7 +121,7 @@
 						<div class="content" style="display: block;height: 180px;">
 						<div class="col-sm-4">
 							<a href="readNews.do?id=${news.getId()}&createTime=${news.getCreateTime()}&title=${news.getTitle()}" target="_self">
-								<img alt="image" src="${MyIP}${news.getImgPath()}" style="height: 170px;width: 170px;">
+								<img alt="image" src="${MyIP}${news.getImgPath()}" style="height: 120px;width: 170px;">
 							</a>
 						</div>
 						<div class="col-sm-8">

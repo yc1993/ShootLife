@@ -118,7 +118,7 @@ public class ImageController {
 			ArrayList<MainImgShowModel> imgList = (ArrayList<MainImgShowModel>) shootService.backMainAllImgList();
 			mav.getModelMap().put("modelList", imgList);
 			
-			List<NewsListModel> newsList = shootService.backNewsList(0, 6);
+			List<NewsListModel> newsList = shootService.backNewsList(0, 11);
 			
 			List<NewsListModel> randNewsList = shootService.randTitleList(4);
 			mav.getModelMap().put("newsList", newsList);
@@ -387,7 +387,7 @@ public class ImageController {
 		createTime = createTime.substring(0, 19);
 		String id = request.getParameter("id");
 		//随机新闻（右边显示）
-		List<NewsListModel> randNewsTitle = shootService.randTitleList(3);
+		List<NewsListModel> randNewsTitle = shootService.randTitleList(6);
 		
 		List<NewsContentModel> newsContentList = shootService.newsContent(id);
 		List<NewsContentModel> newsImgList = shootService.newsImg(id);
