@@ -227,28 +227,28 @@
 						<c:when test="${status.index < 16 }">
 							<c:if test="${status.count % 4 == 0 }">
 								<dd class="rightlimit">
-									<a href="cartoon.do?target=2&index=${model.getId()}" target="_self">
+									<a href="cartoon.do?target=2&index=${model.getId()}&words=1" target="_self">
 										<img alt="${model.getTitle() }"
 										src="${MyIP }${model.getPath()}${model.getImgName() }"
 										title="${model.getTitle() }" />
 									</a>
 									<div id="abc" class="specialMask" style="bottom:0px;"></div>
 									<div class="special" style="bottom:0px;">
-										<a href="${nextPage }?target=2&index=${model.getId()}"
+										<a href="cartoon.do?target=2&index=${model.getId()}&words=1"
 											target="_self" style="color:#fff;">${model.getTitle() }</a><br> <span>${model.getCreateTime()}</span>
 									</div>
 								</dd>
 							</c:if>
 							<c:if test="${status.count % 4 !=0 }">
 								<dd>
-									<a href="cartoon.do?target=2&index=${model.getId()}" target="_self">
+									<a href="cartoon.do?target=2&index=${model.getId()}&words=1" target="_self">
 										<img alt="${model.getTitle() }"
 										src="${MyIP }${model.getPath()}${model.getImgName() }"
 										title="${model.getTitle() }" />
 									</a>
 									<div id="abc" class="specialMask" style="bottom:0px;"></div>
 									<div class="special" style="bottom:0px;">
-										<a href="${nextPage }?target=2&index=${model.getId()}"
+										<a href="cartoon.do?target=2&index=${model.getId()}&words=1"
 											target="_self" style="color:#fff">${model.getTitle() }</a><br> <span>${model.getCreateTime()}</span>
 									</div>
 								</dd>
