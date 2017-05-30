@@ -92,6 +92,23 @@ public class SearchDAO {
 		}
 		return modelList;
 	}
+	
+	public Integer allNumber(String sql, Connection conn){
+		int allCount = 0;
+		try {
+			Statement statement = (Statement) conn.createStatement();
+			ResultSet set = statement.executeQuery(sql);
+			while (set.next()) {
+				allCount = set.getInt("all_count");
+			}
+			set.close();
+			statement.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return allCount;
+	}
 
 	// 返回浏览图片页面的图集
 	public List<SecondImgAryModel> secondPageImageAry(String sql, Connection conn) {

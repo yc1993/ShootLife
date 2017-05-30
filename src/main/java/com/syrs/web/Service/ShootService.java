@@ -49,18 +49,25 @@ public class ShootService {
 	}
 
 	// 根据表名返回副主页的图片列表
-	public List<MainImgShowModel> backMainImgList(String tableName, boolean isManHua) {
+	public List<MainImgShowModel> backMainImgList(String tableName, boolean isManHua, Integer section, Integer count) {
 		String sqlStr = null;
 		if (isManHua) {
-			sqlStr = "SELECT TITLE,ID,CREATE_TIME,PATH,IMG_NAME,NUM " + "FROM " + tableName
-					+ " ORDER BY CREATE_TIME DESC;";
+			//sqlStr = "SELECT TITLE,ID,CREATE_TIME,PATH,IMG_NAME,NUM " + "FROM " + tableName + " ORDER BY CREATE_TIME DESC;";
+			sqlStr = "SELECT TITLE,ID,CREATE_TIME,PATH,IMG_NAME,NUM FROM " + tableName + " ORDER BY ID DESC LIMIT " + (section * 12) + "," + count + ";";
 		} else {
-			sqlStr = "SELECT TITLE,ID,CREATE_TIME,PATH,IMG_NAME " + "FROM " + tableName + " ORDER BY CREATE_TIME DESC;";
+			sqlStr = "SELECT TITLE,ID,CREATE_TIME,PATH,IMG_NAME FROM " + tableName + " ORDER BY ID DESC LIMIT " + (section * 12) + "," + count + ";";
+			//sqlStr = "SELECT TITLE,ID,CREATE_TIME,PATH,IMG_NAME " + "FROM " + tableName + " ORDER BY CREATE_TIME DESC;";
 		}
 		Connection conn = searchDAO.getConnection("jdbc:mysql://" + mysqlIp, "root", "web123");
 		return searchDAO.searchImgModelAry(sqlStr, conn, isManHua);
 	}
 
+	public Integer allNumber(String tableName) {
+		String sql = "select count(*) AS all_count from " + tableName;
+		Connection conn = searchDAO.getConnection("jdbc:mysql://" + mysqlIp, "root", "web123");
+		return searchDAO.allNumber(sql, conn);
+	}
+	
 	// 返回浏览写真图片的图集
 	public List<SecondImgAryModel> backSecondImgList(String yellowListID) {
 		String sqlStr = "SELECT * FROM yellow_img WHERE YELLOW_LIST_ID=" + yellowListID;
@@ -71,7 +78,7 @@ public class ShootService {
 	// 返回下一个不会空的图集id
 	public String backIndexNumber(String yellowListID, String tableName) {
 		String sqlString = "SELECT MAX(ID) AS id FROM " + tableName + " WHERE ID < "
-				+ (Integer.valueOf(yellowListID) + 1) + " ORDER BY ID;";
+				+ Integer.valueOf(yellowListID) + " ORDER BY ID;";
 		Connection conn = searchDAO.getConnection("jdbc:mysql://" + mysqlIp, "root", "web123");
 		return searchDAO.backNextID(sqlString, conn);
 	}

@@ -292,7 +292,7 @@
 			</c:if> 
 			<!-- 根据target不是空的操作 -->
 			<c:if test="${param.target != null }">
-				<c:forEach items="${modelList }" var="model" varStatus="status" begin="${param.section * 12 }" end="${param.section * 12 + 11 }">
+				<c:forEach items="${modelList }" var="model" varStatus="status" >
 					<c:if test="${status.count % 4 !=0 }">
 						<dd>
 							<a
@@ -328,7 +328,7 @@
 				</c:forEach>
 				
 				<dd class="pager">
-					<a class="a1"><c:out value="${modelList.size() }" />条</a>
+					<a class="a1"><c:out value="${allNum }" />条</a>
 					<!-- 上一页 -->
 					<c:forEach items="${pagerModels }" var="pagerModel" varStatus="status">
 						<c:if test="${pagerModel.url eq 'null'}">
@@ -341,7 +341,7 @@
 						</c:if>
 					</c:forEach>
 					<!-- section不需要出现省略的情况 -->
-					<c:if test="${modelList.size() < 132}">
+					<c:if test="${allNum < 132}">
 						<!-- 页码 -->
 						<c:forEach items="${pagerModels }" var="pagerModel" varStatus="status">
 							<c:if test="${pagerModel.url eq 'null' }">
@@ -354,7 +354,7 @@
 					</c:if>
 					
 					<!-- section页面出现省略等的情况 -->
-					<c:if test="${modelList.size() >=132 }">
+					<c:if test="${allNum >=132 }">
 						<!-- 页码 -->
 						<c:forEach items="${pagerModels }" var="pagerModel" varStatus="status">
 							<c:if test="${pagerModel.url eq 'null' }" >

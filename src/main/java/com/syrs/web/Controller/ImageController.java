@@ -167,15 +167,18 @@ public class ImageController {
 				break;
 			}
 			
-			ArrayList<MainImgShowModel> imgList = (ArrayList<MainImgShowModel>) shootService.backMainImgList(tableName, isManHua);
-
-			mav.getModelMap().put("modelList", imgList);
 			
 			//当前页的索引
 			int num = (request.getParameter("section") == null)?0:Integer.parseInt(request.getParameter("section"));
+			ArrayList<MainImgShowModel> imgList = (ArrayList<MainImgShowModel>) shootService.backMainImgList(tableName, isManHua, num, 12);
+			
+			mav.getModelMap().put("modelList", imgList);
+			
+			Integer allNum = shootService.allNumber(tableName);
+			mav.getModelMap().put("allNum", allNum);
 			List<PagerModel> pagerModels = new ArrayList<PagerModel>();
 
-			for (int i = 0; i < ((imgList.size() % 12 == 0?(imgList.size() / 12):(imgList.size() / 12 + 1))); i++) {
+			for (int i = 0; i < ((allNum % 12 == 0?(allNum / 12):(allNum / 12 + 1))); i++) {
 				PagerModel pModel = new PagerModel();
 				
 				//是section=0的时候
@@ -291,7 +294,7 @@ public class ImageController {
 		modelMap.put("cartoonList", cartoonList);
 		
 		ArrayList<SecondImgAryModel> imgList = new ArrayList<>();
-		List<String> list = new ArrayList<String>();
+		List<String> urlList = new ArrayList<String>();
 		imgList = (ArrayList<SecondImgAryModel>) shootService.backManHuaImgList(request.getParameter("index"), request.getParameter("words"));
 		String tableName = "manhua_list";
 		if (imgList.size() == 0) {	//如果下一图集是空，则返回下一图集的index
@@ -300,9 +303,9 @@ public class ImageController {
 		}
 
 		for (SecondImgAryModel secondImgAryModel : imgList) {
-			list.add(IP + secondImgAryModel.getImagePath());
+			urlList.add(IP + secondImgAryModel.getImagePath());
 		}
-		modelMap.put("list",list);
+		modelMap.put("list", urlList);
 	    String title = shootService.backTitle(request.getParameter("index"), tableName);
 		modelMap.put("title", title);
 		

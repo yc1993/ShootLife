@@ -68,14 +68,13 @@ iframe {
 			</a>
 		</div>
 		<!-- 广告 -->
-	
 	</div>
 
 	<div class="tk_row">
 		<!--页面logo-->
 		<div id="imageWrapper_title">
 			<div class="path" style="margin-left:0px">
-				<a href="main.do">首页</a> &gt; 作品展示
+				<a href="main.do?target=${param.target}">首页</a> &gt; 作品展示
 			</div>
 			<!-- <span class="explode"><a class="load_zk" href="http://www.heiguang.com/special/photoapp/" target="_blank"><span>下载图库app</span><span class="look_yt"></span></a></span> -->
 			<!-- <span class="explode"><a href="/showphoto.php?contentid=57198"><span>展开全部作品</span><span class="look_dk"></span></a></span> -->

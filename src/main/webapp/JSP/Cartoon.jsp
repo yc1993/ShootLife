@@ -88,7 +88,7 @@ iframe {
 		<!--页面logo-->
 		<div id="imageWrapper_title">
 			<div class="path" style="margin-left:0px">
-				<a href="main.do">首页</a> &gt; 作品展示&gt;第${param['words']}话
+				<a href="main.do?target=${param.target}">首页</a> &gt; 作品展示&gt;第${param['words']}话
 			</div>
 		</div>
 	</div>
@@ -177,7 +177,7 @@ iframe {
 				<c:choose>
 					<c:when test="${(sessionScope.number + 1 )== list.size() }">
 						<a
-							href="cartoon.do?target=${param['target'] }&index=${param['index'] - 1}&words=1"
+							href="cartoon.do?target=${param['target'] }&index=${param['index']}&words=${param.words + 1}"
 							class="down"><img alt="下页" src="${MyIP }/tmp/image/down.png"></a>
 					</c:when>
 					<c:otherwise>
@@ -188,7 +188,7 @@ iframe {
 				</c:choose>
 				<c:if test="${list.size() eq (sessionScope.number + 1) }">
 					<a
-						href="cartoon.do?target=${param['target']}&index=${param['index'] - 1}&words=1"
+						href="cartoon.do?target=${param['target']}&index=${param['index']}&words=${param.words + 1}"
 						class="end"><img alt="末页" src="${MyIP }/tmp/image/end.png"></a>
 				</c:if>
 				<c:if test="${list.size() != (sessionScope.number + 1) }">
