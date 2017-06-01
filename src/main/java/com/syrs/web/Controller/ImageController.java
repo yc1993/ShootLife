@@ -42,7 +42,7 @@ public class ImageController {
 	@Resource
 	User user;
 	
-	private static final String IP = "http://youyougirl.com";
+	private static final String IP = "http://106.14.220.94";
 	
 	//测试用
 	@RequestMapping("index")
@@ -347,7 +347,7 @@ public class ImageController {
 		List<NewsListModel> newsList = shootService.backNewsList(nowSection, 12);
 
 		//随机新闻（右边显示）
-		List<NewsListModel> randNewsTitle = shootService.randTitleList(6);
+		List<NewsListModel> randNewsTitle = shootService.randTitleList(10);
 		
 		//新闻条数
 		Integer newsCount = shootService.backNewsCount();
@@ -390,7 +390,7 @@ public class ImageController {
 		createTime = createTime.substring(0, 19);
 		String id = request.getParameter("id");
 		//随机新闻（右边显示）
-		List<NewsListModel> randNewsTitle = shootService.randTitleList(6);
+		List<NewsListModel> randNewsTitle = shootService.randTitleList(10);
 		
 		List<NewsContentModel> newsContentList = shootService.newsContent(id);
 		List<NewsContentModel> newsImgList = shootService.newsImg(id);

@@ -51,12 +51,12 @@
 	cursor: pointer;
 	opacity: .6;
 	filter: Alpha(opacity = 60);
-	background: url(${MyIP }/tmp/image/gototop.png)
+	background: url(image/gototop.png)
 		no-repeat;
 }
 
 .backToTop:hover {
-	background: url(${MyIP }/tmp/image/gototop.png)
+	background: url(image/gototop.png)
 		no-repeat -35px 0px;
 }
 
@@ -301,11 +301,11 @@
 								src="${MyIP }${model.getPath()}${model.getImgName() }"
 								title="${model.getTitle() }" />
 							</a>
-							<div id="abc" class="mask"></div>
-							<div class="content">
-								<a
+							<div <c:if test="${param.target != 2}">class="mask"</c:if> <c:if test="${param.target == 2}">class="specialMask" style="bottom:0px;"</c:if>></div>
+							<div <c:if test="${param.target != 2}">class="content"</c:if> <c:if test="${param.target == 2}">class="special" style="bottom:0px;"</c:if>>
+								<a <c:if test="${param.target == 2}">style="color:#fff"</c:if>
 									href="${nextPage }?target=${param.target }&index=${model.getId()}&words=1"
-									target="_self">${model.getTitle() }</a> <span>${model.getCreateTime()}</span>
+									target="_self">${model.getTitle() }</a><c:if test="${param.target == 2}"><br></c:if> <span>${model.getCreateTime()}</span>
 							</div>
 						</dd>
 					</c:if>
@@ -317,11 +317,11 @@
 								src="${MyIP }${model.getPath()}${model.getImgName() }"
 								title="${model.getTitle() }" />
 							</a>
-							<div id="abc" class="mask"></div>
-							<div class="content">
-								<a
+							<div id="abc" <c:if test="${param.target != 2}">class="mask"</c:if> <c:if test="${param.target == 2}">class="specialMask" style="bottom:0px;"</c:if>></div>
+							<div <c:if test="${param.target != 2}">class="content"</c:if> <c:if test="${param.target == 2}">class="special" style="bottom:0px;"</c:if>>
+								<a <c:if test="${param.target == 2}">style="color:#fff"</c:if>
 									href="${nextPage }?target=${param.target }&index=${model.getId()}&words=1"
-									target="_self">${model.getTitle() }</a> <span>${model.getCreateTime()}</span>
+									target="_self">${model.getTitle() }</a><c:if test="${param.target == 2}"><br></c:if> <span>${model.getCreateTime()}</span>
 							</div>
 						</dd>
 					</c:if>
@@ -436,7 +436,7 @@
 		<div class="col_24" id="blog" style="height:270px">
 			<h2 class="tj_title" style="margin-bottom:10px;">
 				<span class="tj_title_left"> <img
-					src="${MyIP }/tmp/image/photo_tktj.png"
+					src="image/photo_tktj.png"
 					alt="图库推荐" />
 				</span>
 				<!-- <a class="tj_title_right" href="http://wpa.qq.com/msgrd?v=3&amp;uin=1760434080&amp;site=qq&amp;menu=yes" target="_self" rel="nofollow" style="width:95px">

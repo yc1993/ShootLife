@@ -17,7 +17,7 @@ import com.syrs.web.Model.SecondImgAryModel;
 public class ShootService {
 	@Resource
 	SearchDAO searchDAO;
-	private final static String mysqlIp = "101.200.40.71:3306/My_DB?useUnicode=true&characterEncoding=utf-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&maxReconnects=10";
+	private final static String mysqlIp = "106.14.220.94:3306/My_DB?useUnicode=true&characterEncoding=utf-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&maxReconnects=10";
 
 	public String backUrl(int id) {
 		String url = null;

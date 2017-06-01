@@ -13,7 +13,7 @@
 <meta name="keywords" content="搞笑,表情,写真,美女,柚柚妹,柚柚网" />
 <meta name="description" content="搞笑,表情,写真,美女,柚柚妹,柚柚网,消遣空余时间，游戏后的调剂品" />
 
-<c:set var="MyIP" value="http://youyougirl.com"></c:set>
+<c:set var="MyIP" value="http://106.14.220.94"></c:set>
 
 <link rel="stylesheet" type="text/css" href="CSS/global.css">
 <link rel="stylesheet" type="text/css" href="CSS/content.css">
@@ -47,12 +47,12 @@ iframe {
 	cursor: pointer;
 	opacity: .6;
 	filter: Alpha(opacity = 60);
-	background: url(${MyIP}/tmp/image/gototop.png)
+	background: url(image/gototop.png)
 		no-repeat;
 }
 
 .backToTop:hover {
-	background: url(${MyIP}/tmp/image/gototop.png)
+	background: url(image/gototop.png)
 		no-repeat -35px 0px;
 }
 
@@ -77,7 +77,7 @@ iframe {
 	<div class="tk_row" id="tk_header">
 		<div class="logo">
 			<a href="main.do"> <img
-				src="${MyIP }/tmp/image/logo.png"
+				src="image/logo.png"
 				alt="logo" />
 			</a>
 		</div>
@@ -204,8 +204,8 @@ iframe {
 	<div class="tk_row">
 		<div class="col_7">
 			<a href="javascript:void()"
-				onmouseover="document.getElementById('zan').style.background='url(${MyIP}/tmp/image/zan2.jpg) no-repeat';"
-				onmouseout="document.getElementById('zan').style.background='url(${MyIP}/tmp/image/zan1.jpg) no-repeat';">
+				onmouseover="document.getElementById('zan').style.background='url(image/zan2.jpg) no-repeat';"
+				onmouseout="document.getElementById('zan').style.background='url(image/zan1.jpg) no-repeat';">
 				<span class="click_status" id='zan'></span> <span class="click_text">赞&nbsp;&nbsp;<span
 					class="number">1</span></span>
 			</a> <span class="show_status"></span> <span class="click_text">浏览&nbsp;&nbsp;<span

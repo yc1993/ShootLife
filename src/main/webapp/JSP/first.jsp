@@ -22,7 +22,7 @@
 
 pageContext.request.queryString:<c:out value="${param.age }"></c:out><br/>
 
-<%-- <sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://101.200.40.71:3307/test"
+<%-- <sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://106.14.220.94:3307/test"
 	user="root" password="web123"/>
 <sql:query var="result" dataSource="${snapshot }">
 	SELECT TITLE FROM yellow_list WHERE ID=1;

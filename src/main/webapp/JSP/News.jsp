@@ -41,12 +41,12 @@
 	cursor: pointer;
 	opacity: .6;
 	filter: Alpha(opacity = 60);
-	background: url(${MyIP }/tmp/image/gototop.png)
+	background: url(image/gototop.png)
 		no-repeat;
 }
 
 .backToTop:hover {
-	background: url(${MyIP }/tmp/image/gototop.png)
+	background: url(image/gototop.png)
 		no-repeat -35px 0px;
 }
 .specialMask{    
