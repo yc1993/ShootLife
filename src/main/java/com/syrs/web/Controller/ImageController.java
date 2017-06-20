@@ -429,6 +429,16 @@ public class ImageController {
 		}
 		return "redirect:push.do";
 	}
+	
+	@RequestMapping(value="mobileTest", method=RequestMethod.GET)
+	public String mobileTest(){
+		return "JSP/mobile/Main.jsp";
+	}
+	
+	@RequestMapping(value="mobileTest2", method=RequestMethod.GET)
+	public String mobileTest2(){
+		return "JSP/mobile/mobileTest.jsp";
+	}
 }
 
 

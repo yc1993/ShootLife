@@ -65,7 +65,7 @@ iframe {
 .pager .pagerContent {
 	text-align:center;
 	display:inline-block;
-	width:35px;
+	width:40px;
 	margin:auto;
 	border:1px solid #000;
 }
