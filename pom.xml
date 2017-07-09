@@ -14,8 +14,8 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
-    
-    
+
+
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -49,6 +49,11 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.40</version>
+		</dependency>
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
 		</dependency>
 
 	<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->

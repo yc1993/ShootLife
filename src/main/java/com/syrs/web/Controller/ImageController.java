@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.syrs.web.DAO.FaceListDao;
+import com.syrs.web.DAO.ManhuaListDao;
+import com.syrs.web.DAO.NewsListDao;
+import com.syrs.web.DAO.YellowListDao;
 import com.syrs.web.Model.MainImgShowModel;
 import com.syrs.web.Model.NewsContentModel;
 import com.syrs.web.Model.NewsListModel;
@@ -24,6 +28,16 @@ import com.syrs.web.Model.SecondImgAryModel;
 import com.syrs.web.Model.TargetModel;
 import com.syrs.web.Model.User;
 import com.syrs.web.Service.ShootService;
+import com.syrs.web.entity.FaceImg;
+import com.syrs.web.entity.FaceList;
+import com.syrs.web.entity.ManhuaImg;
+import com.syrs.web.entity.ManhuaList;
+import com.syrs.web.entity.NewsList;
+import com.syrs.web.entity.NewsListImgAndContent;
+import com.syrs.web.entity.YellowImg;
+import com.syrs.web.entity.YellowList;
+import com.syrs.web.util.JdbcDataSource;
+import com.syrs.web.Service.NewShootService;
 
 /**
  * URL中的param的参数意义
@@ -40,9 +54,25 @@ public class ImageController {
 	ShootService shootService;
 	
 	@Resource
+	NewShootService newShootService;
+	
+	@Resource
+	NewsListDao newsListDao;
+	
+	@Resource
+	YellowListDao yellowListDao;
+	
+	@Resource
+	ManhuaListDao manhuaListDao;
+	
+	@Resource
+	FaceListDao faceListDao;
+	
+	@Resource
 	User user;
 	
 	private static final String IP = "http://106.14.220.94";
+	private static final int lENGTH = 12;
 	
 	//测试用
 	@RequestMapping("index")
@@ -115,17 +145,19 @@ public class ImageController {
 			path = "secondPage.do";
 			
 			//返回混合的页面
-			ArrayList<MainImgShowModel> imgList = (ArrayList<MainImgShowModel>) shootService.backMainAllImgList();
+//			ArrayList<MainImgShowModel> imgList = (ArrayList<MainImgShowModel>) shootService.backMainAllImgList();
+			ArrayList<MainImgShowModel> imgList = (ArrayList<MainImgShowModel>) newShootService.backMainAllImgList();
 			mav.getModelMap().put("modelList", imgList);
 			
-			List<NewsListModel> newsList = shootService.backNewsList(0, 11);
-			
-			List<NewsListModel> randNewsList = shootService.randTitleList(4);
+//			List<NewsListModel> newsList = shootService.backNewsList(0, 11);			
+//			List<NewsListModel> randNewsList = shootService.randTitleList(4);
+			List<NewsList> newsList = newsListDao.getList(0, 11);
+			List<NewsList> randNewsList = newsListDao.getListRand(4);
 			mav.getModelMap().put("newsList", newsList);
 			mav.getModelMap().put("randNewsList", randNewsList);
 			
 		}else {
-			
+			Integer allNum = 0;
 			switch (request.getParameter("target")) {
 			case "1":
 			{
@@ -136,6 +168,7 @@ public class ImageController {
 				mav.getModelMap().put("mainTitle", "写真摄影");
 				tableName = "yellow_list";	//写真表名
 				isManHua = false;
+				allNum = yellowListDao.getNum();
 				path = "secondPage.do";
 			}
 			break;
@@ -148,6 +181,7 @@ public class ImageController {
 				mav.getModelMap().put("mainTitle", "每日一漫");
 				tableName = "manhua_list";	//漫画表名
 				isManHua = true;
+				allNum = manhuaListDao.getNum();
 				path = "cartoon.do";
 			}
 			break;
@@ -160,6 +194,7 @@ public class ImageController {
 				mav.getModelMap().put("mainTitle", "表情世界");
 				tableName = "face_list";	//标签表名
 				isManHua = false;
+				allNum = faceListDao.getNum();
 				path = "secondPage.do";
 			}
 			default:
@@ -170,15 +205,15 @@ public class ImageController {
 			
 			//当前页的索引
 			int num = (request.getParameter("section") == null)?0:Integer.parseInt(request.getParameter("section"));
-			ArrayList<MainImgShowModel> imgList = (ArrayList<MainImgShowModel>) shootService.backMainImgList(tableName, isManHua, num, 12);
-			
+//			ArrayList<MainImgShowModel> imgList = (ArrayList<MainImgShowModel>) shootService.backMainImgList(tableName, isManHua, num, 12);
+			ArrayList<MainImgShowModel> imgList = (ArrayList<MainImgShowModel>) newShootService.backMainImgList(tableName, num, lENGTH);
 			mav.getModelMap().put("modelList", imgList);
 			
-			Integer allNum = shootService.allNumber(tableName);
+//			Integer allNum = shootService.allNumber(tableName);
 			mav.getModelMap().put("allNum", allNum);
 			List<PagerModel> pagerModels = new ArrayList<PagerModel>();
 
-			for (int i = 0; i < ((allNum % 12 == 0?(allNum / 12):(allNum / 12 + 1))); i++) {
+			for (int i = 0; i < ((allNum % lENGTH == 0?(allNum / lENGTH):(allNum / lENGTH + 1))); i++) {
 				PagerModel pModel = new PagerModel();
 				
 				//是section=0的时候
@@ -215,7 +250,8 @@ public class ImageController {
 		mav.getModelMap().put("MyIP", IP);
 		
 		//推荐内容
-		ArrayList<MainImgShowModel> recommendList = (ArrayList<MainImgShowModel>) shootService.backRecommendImg();
+//		ArrayList<MainImgShowModel> recommendList = (ArrayList<MainImgShowModel>) shootService.backRecommendImg();
+		ArrayList<MainImgShowModel> recommendList = (ArrayList<MainImgShowModel>) newShootService.yellowList2MainImgShowModel(yellowListDao.getListRand(6));
 		mav.getModelMap().put("recommendList",recommendList);
 		
 		return mav;
@@ -225,39 +261,58 @@ public class ImageController {
 	public String secondPage(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap modelMap){
 		
 		// 判断点击的是哪个标签
-		ArrayList<SecondImgAryModel> imgList = new ArrayList<>();
+//		ArrayList<SecondImgAryModel> imgList = new ArrayList<>();
 		List<String> list = new ArrayList<String>();
-		String tableName = null;
+//		String tableName = null;
+		String title = null;
 		switch (request.getParameter("target")) {
 		case "1": {
-			imgList = (ArrayList<SecondImgAryModel>) shootService.backSecondImgList(request.getParameter("index"));
-			tableName = "yellow_list";
+//			imgList = (ArrayList<SecondImgAryModel>) shootService.backSecondImgList(request.getParameter("index"));	
+			List<YellowImg> yellowImgs = yellowListDao.getImg(Integer.parseInt(request.getParameter("index")));
+			for (YellowImg yellowImg : yellowImgs) {
+				list.add(IP + yellowImg.getPath());
+			}
+			YellowList yellowList = yellowListDao.getList(Integer.parseInt(request.getParameter("index")));
+			title = yellowList.getTitle();
+//			tableName = "yellow_list";
 		}
 			break;
 		case "2": {
-			imgList = (ArrayList<SecondImgAryModel>) shootService.backManHuaImgList(request.getParameter("index"),"1");
-			tableName = "manhua_list";
+//			imgList = (ArrayList<SecondImgAryModel>) shootService.backManHuaImgList(request.getParameter("index"),"1");
+			List<ManhuaImg> manhuaImgs = manhuaListDao.getListImg(1, Integer.parseInt(request.getParameter("index")));
+			for (ManhuaImg manhuaImg : manhuaImgs) {
+				list.add(IP + manhuaImg.getPath());
+			}
+			ManhuaList manhuaList = manhuaListDao.getList(Integer.parseInt(request.getParameter("index")));
+			title = manhuaList.getTitle();
+//			tableName = "manhua_list";
 			
 		}
 			break;
 		case "3": {
-			imgList = (ArrayList<SecondImgAryModel>) shootService.backFaceImgList(request.getParameter("index"));
-			tableName = "face_list";
+//			imgList = (ArrayList<SecondImgAryModel>) shootService.backFaceImgList(request.getParameter("index"));
+			List<FaceImg> faceImgs = faceListDao.getImg(Integer.parseInt(request.getParameter("index")));
+			for (FaceImg faceImg : faceImgs) {
+				list.add(IP + faceImg.getPath());
+			}
+			FaceList faceList = faceListDao.getList(Integer.parseInt(request.getParameter("index")));
+			title = faceList.getTitle();
+//			tableName = "face_list";
 		}
 			break;
 
 		default:
 			break;
 		}
-		if (imgList.size() == 0) {
-			String index = shootService.backIndexNumber(request.getParameter("index"),tableName);
-			return "redirect:secondPage.do?target=" + request.getParameter("target") + "&index=" + index;
-		}
+//		if (imgList.size() == 0) {
+//			String index = shootService.backIndexNumber(request.getParameter("index"),tableName);
+//			return "redirect:secondPage.do?target=" + request.getParameter("target") + "&index=" + index;
+//		}
 		
-
-		for (SecondImgAryModel secondImgAryModel : imgList) {
-			list.add(IP + secondImgAryModel.getImagePath());
-		}
+//
+//		for (SecondImgAryModel secondImgAryModel : imgList) {
+//			list.add(IP + secondImgAryModel.getImagePath());
+//		}
 		
 		modelMap.put("list",list);
 		request.setAttribute("count", list.size());
@@ -271,11 +326,13 @@ public class ImageController {
 		
 		modelMap.put("secondPage", "secondPage.do");
 		//随机返回四条数据
-		ArrayList<MainImgShowModel> aboutList = (ArrayList<MainImgShowModel>) shootService.backAboutImg();
+//		ArrayList<MainImgShowModel> aboutList = (ArrayList<MainImgShowModel>) shootService.backAboutImg();
+		ArrayList<MainImgShowModel> aboutList = (ArrayList<MainImgShowModel>) newShootService.yellowList2MainImgShowModel(yellowListDao.getListRand(4));
 		modelMap.put("aboutList", aboutList);
 		
 		//返回标题
-		String title = shootService.backTitle(request.getParameter("index"), tableName);
+//		String title = shootService.backTitle(request.getParameter("index"), tableName);
+		
 		modelMap.put("title", title);
 		return "JSP/Second.jsp";
 	}
@@ -283,9 +340,10 @@ public class ImageController {
 	@RequestMapping("cartoon")
 	public String cartoonPage(HttpServletRequest request, ModelMap modelMap, HttpSession session) {
 		//先判断是否为连载漫画
-		Integer count = shootService.backNumberOfCartoons(request.getParameter("index"));
+//		Integer count = shootService.backNumberOfCartoons(request.getParameter("index"));
+		ManhuaList manhuaList = manhuaListDao.getList(Integer.parseInt(request.getParameter("index")));
 		List<PagerModel> cartoonList = new ArrayList<>();
-		for (int i = 0; i < count; i++) {
+		for (int i = 0; i < manhuaList.getNum(); i++) {
 			PagerModel pm = new PagerModel();
 			pm.setUrl("cartoon.do?target=" + request.getParameter("target") + "&index=" + request.getParameter("index") + "&words=" + (i+1));
 			pm.setShowContent("第" + (i+1) + "话");
@@ -293,21 +351,23 @@ public class ImageController {
 		}
 		modelMap.put("cartoonList", cartoonList);
 		
-		ArrayList<SecondImgAryModel> imgList = new ArrayList<>();
+//		ArrayList<SecondImgAryModel> imgList = new ArrayList<>();
+		ArrayList<ManhuaImg> manhuaImgs = new ArrayList<>();
 		List<String> urlList = new ArrayList<String>();
-		imgList = (ArrayList<SecondImgAryModel>) shootService.backManHuaImgList(request.getParameter("index"), request.getParameter("words"));
-		String tableName = "manhua_list";
-		if (imgList.size() == 0) {	//如果下一图集是空，则返回下一图集的index
-			String index = shootService.backIndexNumber(request.getParameter("index"),tableName);
-			return "redirect:cartoon.do?target=" + request.getParameter("target") + "&index=" + index + "&words=1";
-		}
+//		imgList = (ArrayList<SecondImgAryModel>) shootService.backManHuaImgList(request.getParameter("index"), request.getParameter("words"));
+		manhuaImgs = (ArrayList<ManhuaImg>) manhuaListDao.getListImg( Integer.parseInt(request.getParameter("words")), Integer.parseInt(request.getParameter("index")));
+//		String tableName = "manhua_list";
+//		if (manhuaImgs.size() == 0) {	//如果下一图集是空，则返回下一图集的index
+//			String index = shootService.backIndexNumber(request.getParameter("index"),tableName);
+//			return "redirect:cartoon.do?target=" + request.getParameter("target") + "&index=" + index + "&words=1";
+//		}
 
-		for (SecondImgAryModel secondImgAryModel : imgList) {
-			urlList.add(IP + secondImgAryModel.getImagePath());
+		for (ManhuaImg manhuaImg : manhuaImgs) {
+			urlList.add(IP + manhuaImg.getPath());
 		}
 		modelMap.put("list", urlList);
-	    String title = shootService.backTitle(request.getParameter("index"), tableName);
-		modelMap.put("title", title);
+//	    String title = shootService.backTitle(request.getParameter("index"), tableName);
+		modelMap.put("title", manhuaList.getTitle());
 		
 		//session中的number记录查看当前图集是第几页
 		if (request.getParameter("page") == null || session.getAttribute("number") == request.getParameter("page") || session.getAttribute("number") == null) {
@@ -344,13 +404,16 @@ public class ImageController {
 		String sectionStr = request.getParameter("section");
 
 		int nowSection = (sectionStr == null)?0:Integer.parseInt(sectionStr);
-		List<NewsListModel> newsList = shootService.backNewsList(nowSection, 12);
+//		List<NewsListModel> newsList = shootService.backNewsList(nowSection, 12);
+		List<NewsList> newsList = newsListDao.getList(0, 12);
 
 		//随机新闻（右边显示）
-		List<NewsListModel> randNewsTitle = shootService.randTitleList(10);
+//		List<NewsListModel> randNewsTitle = shootService.randTitleList(10);
+		List<NewsList> randNewsTitle = newsListDao.getListRand(10);
 		
 		//新闻条数
-		Integer newsCount = shootService.backNewsCount();
+//		Integer newsCount = shootService.backNewsCount();
+		Integer newsCount = newsListDao.getNum();
 		//当前页的索引
 		List<PagerModel> pagerModels = new ArrayList<PagerModel>();
 		
@@ -388,17 +451,20 @@ public class ImageController {
 		String newsTitle = request.getParameter("title");
 		String createTime = request.getParameter("createTime");
 		createTime = createTime.substring(0, 19);
-		String id = request.getParameter("id");
+//		String id = request.getParameter("id");
 		//随机新闻（右边显示）
-		List<NewsListModel> randNewsTitle = shootService.randTitleList(10);
+//		List<NewsListModel> randNewsTitle = shootService.randTitleList(10);
+		List<NewsList> randNewsTitle = newsListDao.getListRand(10);
 		
-		List<NewsContentModel> newsContentList = shootService.newsContent(id);
-		List<NewsContentModel> newsImgList = shootService.newsImg(id);
-		Map<Integer, NewsContentModel> newsMap = new HashMap<>();
-		for (NewsContentModel newsContent : newsContentList) {
+//		List<NewsContentModel> newsContentList = shootService.newsContent(id);
+//		List<NewsContentModel> newsImgList = shootService.newsImg(id);
+		List<NewsListImgAndContent> newsContentList = newsListDao.getLisContent(Integer.parseInt(request.getParameter("id")));
+		List<NewsListImgAndContent> newsImgList = newsListDao.getLisImg(Integer.parseInt(request.getParameter("id")));
+		Map<Integer, NewsListImgAndContent> newsMap = new HashMap<>();
+		for (NewsListImgAndContent newsContent : newsContentList) {
 			newsMap.put(newsContent.getNum(), newsContent);
 		}
-		for (NewsContentModel newsImg : newsImgList) {
+		for (NewsListImgAndContent newsImg : newsImgList) {
 			newsMap.put(newsImg.getNum(), newsImg);
 		}
 		
@@ -439,6 +505,16 @@ public class ImageController {
 	public String mobileTest2(){
 		return "JSP/mobile/mobileTest.jsp";
 	}
+	
+	public static void main(String args[]){
+		 try {
+			JdbcDataSource.getInstance();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	 }
 }
 
 

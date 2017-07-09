@@ -342,7 +342,7 @@
 					</c:forEach>
 					<!-- section不需要出现省略的情况 -->
 					<c:if test="${allNum < 132}">
-						<!-- 页码 -->
+						->
 						<c:forEach items="${pagerModels }" var="pagerModel" varStatus="status">
 							<c:if test="${pagerModel.url eq 'null' }">
 								<span>${pagerModel.showContent}</span>

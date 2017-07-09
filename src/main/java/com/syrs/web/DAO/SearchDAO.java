@@ -120,7 +120,7 @@ public class SearchDAO {
 				SecondImgAryModel siam = new SecondImgAryModel();
 				siam.setId(set.getInt("ID"));
 				siam.setImagePath(set.getString("PATH"));
-				siam.setYellowListId(set.getString("YELLOW_LIST_ID"));
+				siam.setListId(set.getString("YELLOW_LIST_ID"));
 				aryList.add(siam);
 			}
 			set.close();
@@ -178,7 +178,7 @@ public class SearchDAO {
 				SecondImgAryModel siam = new SecondImgAryModel();
 				siam.setId(set.getInt("ID"));
 				siam.setImagePath(set.getString("PATH"));
-				siam.setYellowListId(set.getString("MANHUA_LIST_ID"));
+				siam.setListId(set.getString("MANHUA_LIST_ID"));
 				aryList.add(siam);
 			}
 			set.close();
@@ -199,7 +199,7 @@ public class SearchDAO {
 				SecondImgAryModel siam = new SecondImgAryModel();
 				siam.setId(set.getInt("ID"));
 				siam.setImagePath(set.getString("PATH"));
-				siam.setYellowListId(set.getString("FACE_LIST_ID"));
+				siam.setListId(set.getString("FACE_LIST_ID"));
 				aryList.add(siam);
 			}
 			set.close();

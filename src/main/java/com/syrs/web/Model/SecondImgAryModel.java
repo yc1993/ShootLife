@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class SecondImgAryModel {
 	private Integer id;
 	private String imagePath;
-	private String yellowListId;
+	private String listId;
 	public Integer getId() {
 		return id;
 	}
@@ -22,12 +22,14 @@ public class SecondImgAryModel {
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
-	public String getYellowListId() {
-		return yellowListId;
+	
+	public String getListId() {
+		return listId;
 	}
-	public void setYellowListId(String yellowListId) {
-		this.yellowListId = yellowListId;
+	public void setListId(String listId) {
+		this.listId = listId;
 	}
+	
 	
 	
 	
