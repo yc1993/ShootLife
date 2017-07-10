@@ -402,7 +402,7 @@ public class ImageController {
 
 		int nowSection = (sectionStr == null)?0:Integer.parseInt(sectionStr);
 //		List<NewsListModel> newsList = shootService.backNewsList(nowSection, 12);
-		List<NewsList> newsList = newsListDao.getList(0, 12);
+		List<NewsList> newsList = newsListDao.getList(nowSection, 12);
 
 		//随机新闻（右边显示）
 //		List<NewsListModel> randNewsTitle = shootService.randTitleList(10);
