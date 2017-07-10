@@ -21,12 +21,10 @@ import com.syrs.web.DAO.ManhuaListDao;
 import com.syrs.web.DAO.NewsListDao;
 import com.syrs.web.DAO.YellowListDao;
 import com.syrs.web.Model.MainImgShowModel;
-import com.syrs.web.Model.NewsContentModel;
-import com.syrs.web.Model.NewsListModel;
 import com.syrs.web.Model.PagerModel;
-import com.syrs.web.Model.SecondImgAryModel;
 import com.syrs.web.Model.TargetModel;
 import com.syrs.web.Model.User;
+import com.syrs.web.Service.NewShootService;
 import com.syrs.web.Service.ShootService;
 import com.syrs.web.entity.FaceImg;
 import com.syrs.web.entity.FaceList;
@@ -37,7 +35,6 @@ import com.syrs.web.entity.NewsListImgAndContent;
 import com.syrs.web.entity.YellowImg;
 import com.syrs.web.entity.YellowList;
 import com.syrs.web.util.JdbcDataSource;
-import com.syrs.web.Service.NewShootService;
 
 /**
  * URL中的param的参数意义
@@ -496,14 +493,19 @@ public class ImageController {
 		return "redirect:push.do";
 	}
 	
-	@RequestMapping(value="mobileTest", method=RequestMethod.GET)
-	public String mobileTest(){
-		return "JSP/mobile/Main.jsp";
+	@RequestMapping(value="mobileMain", method=RequestMethod.GET)
+	public String mobileMain(){
+		return "JSP/mobile/main.jsp";
 	}
 	
-	@RequestMapping(value="mobileTest2", method=RequestMethod.GET)
-	public String mobileTest2(){
-		return "JSP/mobile/mobileTest.jsp";
+	@RequestMapping(value="mobilePhoto", method=RequestMethod.GET)
+	public String mobilePhoto(){
+		return "JSP/mobile/photo.jsp";
+	}
+
+	@RequestMapping(value="mobileNews", method=RequestMethod.GET)
+	public String mobileNews(){
+		return "JSP/mobile/news.jsp";
 	}
 	
 	public static void main(String args[]){
