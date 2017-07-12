@@ -128,4 +128,14 @@ public class NewShootService {
 		return mainImgShowModels;
 	}
 
+	/**
+	 * 手机端数据
+	 */
+	
+	public List<MainImgShowModel> mobileMainData(int count) {
+		List<YellowList> yellowLists = yellowListDao.getList(0, count);
+		List<MainImgShowModel> list = yellowList2MainImgShowModel(yellowLists);
+		return list;
+	}
+	
 }

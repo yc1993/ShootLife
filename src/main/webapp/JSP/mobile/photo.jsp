@@ -36,13 +36,13 @@
             <!-- 菜单具体展示内容 -->
             <ul class="mui-table-view">
 			    <li class="mui-table-view-cell">
-			        <a class="tableCell" href="mobileMain.do" target="_self" style="color: #FFFFFF;">首页</a>
+			        <a id="shouye" class="tableCell" href="mobileMain.do" target="_self" style="color: #FFFFFF;">首页</a>
 			    </li>
 			    <li class="mui-table-view-cell">
-			        <a class="tableCell" href="#" target="_self" style="color: #FFFFFF;">写真</a>
+			        <a id="xiezhen" class="tableCell" href="#" target="_self" style="color: #FFFFFF;">写真</a>
 			    </li>
 			    <li class="mui-table-view-cell">
-			        <a class="tableCell" href="mobileNews.do" target="_self" style="color: #FFFFFF;">新闻</a>
+			        <a id="xinwen" class="tableCell" href="mobileNews.do" target="_self" style="color: #FFFFFF;">新闻</a>
 			    </li>
 			</ul>
           </div>
@@ -129,19 +129,24 @@
       </div>
     </div>
     <script src="dist/js/mui.js" type="text/javascript" charset="utf-8"></script>
+    <script src="JS/common.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
     mui.init()
     $(function(){
-			mui('.mui-scroll-wrapper').scroll({
-				scrollY: true, //是否竖向滚动
-				scrollX: false, //是否横向滚动
-				startX: 0, //初始化时滚动至x
-				startY: 0, //初始化时滚动至y
-				indicators: true, //是否显示滚动条
-				deceleration:0.0006, //阻尼系数,系数越小滑动越灵敏
-				bounce: true //是否启用回弹
-			});
+		mui('.mui-scroll-wrapper').scroll({
+			scrollY: true, //是否竖向滚动
+			scrollX: false, //是否横向滚动
+			startX: 0, //初始化时滚动至x
+			startY: 0, //初始化时滚动至y
+			indicators: true, //是否显示滚动条
+			deceleration:0.0006, //阻尼系数,系数越小滑动越灵敏
+			bounce: true //是否启用回弹
 		});
+	});
+    
+    addEvent("shouye", "mobileMain.do");
+    addEvent("xinwen", "mobileNews.do");
+ 
     </script>
 </body>
 </html>

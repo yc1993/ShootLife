@@ -29,13 +29,13 @@
           <div class="mui-scroll">
         		<ul class="mui-table-view">
 			    <li class="mui-table-view-cell">
-			        <a class="tableCell" href="#" target="_self" style="color: #FFFFFF;">首页</a>
+			        <a id="shouye" class="tableCell" href="#" target="_self" style="color: #FFFFFF;">首页</a>
 			    </li>
 			    <li class="mui-table-view-cell">
-			        <a class="tableCell" href="mobilePhoto.do" target="_self" style="color: #FFFFFF;">写真</a>
+			        <a id="xiezhen" class="tableCell" href="mobilePhoto.do" target="_self" style="color: #FFFFFF;">写真</a>
 			    </li>
 			    <li class="mui-table-view-cell">
-			        <a class="tableCell" href="mobileNews.do" target="_self" style="color: #FFFFFF;">新闻</a>
+			        <a id="xinwen" class="tableCell" href="mobileNews.do" target="_self" style="color: #FFFFFF;">新闻</a>
 			    </li>
 			</ul>
           </div>
@@ -54,39 +54,46 @@
 			<!-- 主界面具体展示内容 -->
             	<ul class="mui-table-view">
 			    <li class="mui-table-view-cell">
-			    		<!--写真-->
-			    		<h4 >美女写真</h4>
-			    		<div class="mui-card">
+	    			<!--写真-->
+		    		<h4 >美女写真</h4>
+		    		<c:forEach items="${photoList}" var="photo">
+		    			<div class="mui-card">
 			    			<a href="#">
-						<!--页眉，放置标题-->
-						<div class="mui-card-header">页眉</div>
-						<!--内容区-->
-						<div class="mui-card-content"><img src="image/1.jpeg" width="100%"></div>
-						<!--页脚，放置补充信息或支持的操作-->
-						<div class="mui-card-footer">页脚</div>
+								<!--页眉，放置标题-->
+								<!-- <div class="mui-card-header">页眉</div> -->
+								<!--内容区-->
+								<div class="mui-card-content"><img src="${MyIP}${photo.path}${photo.imgName}" width="100%"></div>
+								<!--页脚，放置补充信息或支持的操作-->
+								<div class="mui-card-footer">${photo.title}</div>
+							</a>
+						</div>
+		    		</c:forEach>
+		    		
+		    		<div class="mui-card">
+		    			<a id="special" href="www.baidu.com">
+							<div class="mui-card-header">页眉</div>
+							<div class="mui-card-content"><img src="image/1.jpeg" width="100%"></div>
+							<div class="mui-card-footer">测试</div>
 						</a>
 					</div>
-					<div class="mui-card">
-						<!--页眉，放置标题-->
-						<div class="mui-card-header">页眉</div>
-						<!--内容区-->
-						<div class="mui-card-content"><img src="image/2.jpeg" width="100%"></div>
-						<!--页脚，放置补充信息或支持的操作-->
-						<div class="mui-card-footer">页脚</div>
-					</div>
-					<div class="mui-card">
-						<!--页眉，放置标题-->
-						<div class="mui-card-header">页眉</div>
-						<!--内容区-->
-						<div class="mui-card-content"><img src="image/3.jpeg" width="100%"></div>
-						<!--页脚，放置补充信息或支持的操作-->
-						<div class="mui-card-footer">页脚</div>
-					</div>
+
 			    </li>
 			    <li class="mui-table-view-cell">
 			    		<h4 >热点新闻</h4>
 			    		<ul class="mui-table-view">
-			    		    <li class="mui-table-view-cell mui-media">
+			    		    
+			    		    <c:forEach items="${newsList}" var="news">
+			    		    	<li class="mui-table-view-cell mui-media">
+			    		        <a href="javascript:;">
+			    		            <img class="mui-media-object mui-pull-left" src="${MyIP}${news.imgPath}">
+			    		            <div class="mui-media-body">
+			    		                <p class="mui-ellipsis">${news.title}</p>
+			    		            </div>
+			    		        </a>
+			    		    </li>
+			    		    </c:forEach>
+			    		    
+			    		   <!--  <li class="mui-table-view-cell mui-media">
 			    		        <a href="javascript:;">
 			    		            <img class="mui-media-object mui-pull-left" src="http://placehold.it/40x30">
 			    		            <div class="mui-media-body">
@@ -94,39 +101,21 @@
 			    		                <p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
 			    		            </div>
 			    		        </a>
-			    		    </li>
-			    		    <li class="mui-table-view-cell mui-media">
-			    		        <a href="javascript:;">
-			    		            <img class="mui-media-object mui-pull-left" src="http://placehold.it/40x30">
-			    		            <div class="mui-media-body">
-			    		                木屋
-			    		                <p class="mui-ellipsis">想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.</p>
-			    		            </div>
-			    		        </a>
-			    		    </li>
-			    		    <li class="mui-table-view-cell mui-media">
-			    		        <a href="javascript:;">
-			    		            <img class="mui-media-object mui-pull-left" src="http://placehold.it/40x30">
-			    		            <div class="mui-media-body">
-			    		                CBD
-			    		                <p class="mui-ellipsis">烤炉模式的城，到黄昏，如同打翻的调色盘一般.</p>
-			    		            </div>
-			    		        </a>
-			    		    </li>
+			    		    </li> -->
 			    		</ul>
 			    </li>
-			    <li class="mui-table-view-cell">
-			    		<!--漫画-->
+			    <!-- <li class="mui-table-view-cell">
+			    		漫画
 			    		<h4 >每日一漫</h4>
 			    		<div class="mui-card">
-						<!--页眉，放置标题-->
+						页眉，放置标题
 						<div class="mui-card-header">页眉</div>
-						<!--内容区-->
+						内容区
 						<div class="mui-card-content">内容区</div>
-						<!--页脚，放置补充信息或支持的操作-->
+						页脚，放置补充信息或支持的操作
 						<div class="mui-card-footer">页脚</div>
 					</div>
-			    </li>
+			    </li> -->
 			</ul>  
           </div>
         </div>  
@@ -134,19 +123,26 @@
       </div>
     </div>
     <script src="dist/js/mui.js" type="text/javascript" charset="utf-8"></script>
+    <script src="JS/common.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
-    mui.init()
+    mui.init();
     $(function(){
-			mui('.mui-scroll-wrapper').scroll({
-				scrollY: true, //是否竖向滚动
-				scrollX: false, //是否横向滚动
-				startX: 0, //初始化时滚动至x
-				startY: 0, //初始化时滚动至y
-				indicators: true, //是否显示滚动条
-				deceleration:0.0006, //阻尼系数,系数越小滑动越灵敏
-				bounce: true //是否启用回弹
-			});
+		mui('.mui-scroll-wrapper').scroll({
+			scrollY: true, //是否竖向滚动
+			scrollX: false, //是否横向滚动
+			startX: 0, //初始化时滚动至x
+			startY: 0, //初始化时滚动至y
+			indicators: true, //是否显示滚动条
+			deceleration:0.0006, //阻尼系数,系数越小滑动越灵敏
+			bounce: true, //是否启用回弹
 		});
+		
+		
+	});
+
+	addEvent("xiezhen", "mobilePhoto.do");
+	addEvent("xinwen", "mobileNews.do");
+    addEvent("special", "main.do");
     </script>
 </body>
 </html>

@@ -494,12 +494,21 @@ public class ImageController {
 	}
 	
 	@RequestMapping(value="mobileMain", method=RequestMethod.GET)
-	public String mobileMain(){
+	public String mobileMain(HttpSession session ,ModelMap map, HttpServletRequest request){
+		
+		//主页写真
+		List<MainImgShowModel> photoList = newShootService.mobileMainData(4);
+		map.put("photoList", photoList);
+		
+		//新闻
+		List<NewsList> newsList = newsListDao.getList(0, 4);
+		map.put("newsList", newsList);
+		map.put("MyIP", IP);
 		return "JSP/mobile/main.jsp";
 	}
 	
 	@RequestMapping(value="mobilePhoto", method=RequestMethod.GET)
-	public String mobilePhoto(){
+	public String mobilePhoto(HttpSession session ,ModelMap map, HttpServletRequest request){
 		return "JSP/mobile/photo.jsp";
 	}
 
