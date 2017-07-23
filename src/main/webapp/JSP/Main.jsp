@@ -448,7 +448,7 @@
 				<div class="tj_list">
 					<div class="tj_list_border">
 						<a
-							href="${nextPage }?target=1&index=${model.getId()}"
+							href="secondPage.do?target=1&index=${model.getId()}"
 							target="_self" title="${model.getTitle() }" rel="nofollow"> <img
 							src="${MyIP }${model.getPath()}${model.getImgName() }" alt="${model.getTitle() }">
 						</a>
@@ -464,7 +464,7 @@
 				<div class="tj_list" style="margin-right:0px">
 					<div class="tj_list_border">
 						<a
-							href="${nextPage }?target=1&index=${model.getId()}"
+							href="secondPage.do?target=1&index=${model.getId()}"
 							target="_self" title="${model.getTitle() }" rel="nofollow"> <img
 							src="${MyIP }${model.getPath()}${model.getImgName() }" alt="${model.getTitle() }">
 						</a>

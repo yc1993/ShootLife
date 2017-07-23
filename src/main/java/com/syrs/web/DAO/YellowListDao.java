@@ -210,10 +210,10 @@ public class YellowListDao {
 		ArrayList<YellowImg> yellowImgs = new ArrayList<>();
 		try {
 			jdbc = new JDBC();
-			YellowImg yellowImg = new YellowImg();
 	   		jdbc.sql = "SELECT * FROM yellow_img WHERE YELLOW_LIST_ID = " + yellowListID + ";";
 			jdbc.noParamsQuery();
 	   		while(jdbc.rs.next()){
+	   			YellowImg yellowImg = new YellowImg();
 	   			yellowImg.setId(jdbc.rs.getInt("ID"));
 	   			yellowImg.setYellowListId(jdbc.rs.getInt("YELLOW_LIST_ID"));
 	   			yellowImg.setImgName(jdbc.rs.getString("IMG_NAME"));
