@@ -17,6 +17,16 @@
 		.tableCell {
 			background: #333;
 		}
+		.mui-card {
+			width: 46%;
+			margin: 2%;
+			display: inline-block;
+			float: left;
+		}
+		.mui-card-footer {
+			font-size: 12px;
+			padding: 0px 2px;
+		}
 	</style>
 </head>
 <body>
@@ -32,10 +42,10 @@
 			        <a id="shouye" class="tableCell" href="#" target="_self" style="color: #FFFFFF;">首页</a>
 			    </li>
 			    <li class="mui-table-view-cell">
-			        <a id="xiezhen" class="tableCell" href="mobilePhoto.do" target="_self" style="color: #FFFFFF;">写真</a>
+			        <a id="xiezhen" class="tableCell" href="mobilePhoto.do?section=1" target="_self" style="color: #FFFFFF;">写真</a>
 			    </li>
 			    <li class="mui-table-view-cell">
-			        <a id="xinwen" class="tableCell" href="mobileNews.do" target="_self" style="color: #FFFFFF;">新闻</a>
+			        <a id="xinwen" class="tableCell" href="mobileNews.do?section=1" target="_self" style="color: #FFFFFF;">新闻</a>
 			    </li>
 			</ul>
           </div>
@@ -58,7 +68,7 @@
 		    		<h4 >美女写真</h4>
 		    		<c:forEach items="${photoList}" var="photo">
 		    			<div class="mui-card">
-			    			<a href="#">
+			    			<a href="mobileRP.do?index=${photo.id}&page=1">
 								<!--页眉，放置标题-->
 								<!-- <div class="mui-card-header">页眉</div> -->
 								<!--内容区-->
@@ -68,14 +78,14 @@
 							</a>
 						</div>
 		    		</c:forEach>
-		    		
+<!-- 		    		
 		    		<div class="mui-card">
 		    			<a id="special" href="www.baidu.com">
 							<div class="mui-card-header">页眉</div>
 							<div class="mui-card-content"><img src="image/1.jpeg" width="100%"></div>
 							<div class="mui-card-footer">测试</div>
 						</a>
-					</div>
+					</div> -->
 
 			    </li>
 			    <li class="mui-table-view-cell">
@@ -92,30 +102,8 @@
 			    		        </a>
 			    		    </li>
 			    		    </c:forEach>
-			    		    
-			    		   <!--  <li class="mui-table-view-cell mui-media">
-			    		        <a href="javascript:;">
-			    		            <img class="mui-media-object mui-pull-left" src="http://placehold.it/40x30">
-			    		            <div class="mui-media-body">
-			    		                幸福
-			    		                <p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
-			    		            </div>
-			    		        </a>
-			    		    </li> -->
 			    		</ul>
 			    </li>
-			    <!-- <li class="mui-table-view-cell">
-			    		漫画
-			    		<h4 >每日一漫</h4>
-			    		<div class="mui-card">
-						页眉，放置标题
-						<div class="mui-card-header">页眉</div>
-						内容区
-						<div class="mui-card-content">内容区</div>
-						页脚，放置补充信息或支持的操作
-						<div class="mui-card-footer">页脚</div>
-					</div>
-			    </li> -->
 			</ul>  
           </div>
         </div>  
@@ -140,9 +128,9 @@
 		
 	});
 
-	addEvent("xiezhen", "mobilePhoto.do");
-	addEvent("xinwen", "mobileNews.do");
-    addEvent("special", "main.do");
+	addEvent("xiezhen", "mobilePhoto.do?section=1");
+	addEvent("xinwen", "mobileNews.do?section=1");
+	addEvent("shouye", "mobileMain.do");
     </script>
 </body>
 </html>

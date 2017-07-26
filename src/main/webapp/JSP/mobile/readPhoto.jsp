@@ -8,23 +8,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>少女写真</title>
+    <title>${title}</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <link rel="stylesheet" type="text/css" href="dist/css/mui.css"/>
 	<script type="text/javascript" src="JS/jquery-3.2.1.min.js"></script>
 	<style>
 		.tableCell {
 			background: #333;
-		}
-		.mui-card {
-			width: 46%;
-			margin: 2%;
-			display: inline-block;
-			float: left;
-		}
-		.mui-card-footer {
-			font-size: 12px;
-			padding: 0px 2px;
 		}
 		.nextOrPrev {
 			text-align: center;
@@ -63,53 +53,58 @@
         <!-- 主页面标题 -->
         <header class="mui-bar mui-bar-nav">
           <a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left" href="#offCanvasSide"></a>
-          <h1 class="mui-title">写真</h1>
+          <h1 class="mui-title">${title}</h1>
         </header>
         
         <div class="mui-content mui-scroll-wrapper">
           <div class="mui-scroll">
             <!-- 主界面具体展示内容 -->
             
-            <c:forEach items="${photoList}" var="photo">
-    			<div class="mui-card">
-	    			<a href="mobileRP.do?index=${photo.id}&page=1">
-						<!--页眉，放置标题-->
-						<!-- <div class="mui-card-header">页眉</div> -->
+            <c:forEach items="${list }" var="imgPath" varStatus="status">
+				<c:if test="${param.page eq status.index }">
+					<div class="mui-card">
 						<!--内容区-->
-						<div class="mui-card-content"><img src="${MyIP}${photo.path}${photo.imgName}" width="100%"></div>
+						<div class="mui-card-content"><img src="${imgPath}" width="100%" title="${title }" alt="${title }"></div>
 						<!--页脚，放置补充信息或支持的操作-->
-						<div class="mui-card-footer">${photo.title}</div>
-					</a>
-				</div>
-    		</c:forEach>
-            
-			<!-- <div class="mui-card">
-				页眉，放置标题
-				<div class="mui-card-header">页眉</div>
-				内容区
-				<div class="mui-card-content"><img src="image/3.jpeg" width="100%"></div>
-				页脚，放置补充信息或支持的操作
-				<div class="mui-card-footer">页脚</div>
-			</div> -->
-			
+						<div class="mui-card-footer">${title}</div>
+					</div>
+				</c:if>
+			</c:forEach>
 			<!--上下页-->
 			<div class="nextOrPrev">
-				<button type="button" class="mui-btn" onclick="prevPage()">上一页</button>
-				<button type="button" class="mui-btn" onclick="nextPage()">下一页</button>
+				<button type="button" class="mui-btn">上一页</button>
+				<button type="button" class="mui-btn">下一页</button>
 			</div>
 			<br />
-			<!--随机新闻-->
+			<!--推荐新闻-->
 			<ul class="mui-table-view">
-			    <c:forEach items="${randNewsList}" var="news">
-    		    	<li class="mui-table-view-cell mui-media">
-	    		        <a href="javascript:;">
-	    		            <img class="mui-media-object mui-pull-left" src="${MyIP}${news.imgPath}">
-	    		            <div class="mui-media-body">
-	    		                <p class="mui-ellipsis">${news.title}</p>
-	    		            </div>
-	    		        </a>
-	    		    </li>
-    		    </c:forEach>
+			    <li class="mui-table-view-cell mui-media">
+			        <a href="javascript:;">
+			            <img class="mui-media-object mui-pull-left" src="http://placehold.it/40x30">
+			            <div class="mui-media-body">
+			                幸福
+			                <p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+			            </div>
+			        </a>
+			    </li>
+			    <li class="mui-table-view-cell mui-media">
+			        <a href="javascript:;">
+			            <img class="mui-media-object mui-pull-left" src="http://placehold.it/40x30">
+			            <div class="mui-media-body">
+			                木屋
+			                <p class="mui-ellipsis">想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.</p>
+			            </div>
+			        </a>
+			    </li>
+			    <li class="mui-table-view-cell mui-media">
+			        <a href="javascript:;">
+			            <img class="mui-media-object mui-pull-left" src="http://placehold.it/40x30">
+			            <div class="mui-media-body">
+			                CBD
+			                <p class="mui-ellipsis">烤炉模式的城，到黄昏，如同打翻的调色盘一般.</p>
+			            </div>
+			        </a>
+			    </li>
 			</ul>
 			
           </div>
@@ -133,29 +128,9 @@
 		});
 	});
     
-    addEvent("shouye", "mobileMain.do");
-    addEvent("xiezhen", "mobilePhoto.do?section=1");
+    addEvent("shouye", "mobileMain.do?section=1");
     addEvent("xinwen", "mobileNews.do?section=1");
- 
-    var prevPage = function() {
-    	var section = getQueryString("section");
-    	if (1 == section) {
-    		alert("已经是第一页了!");
-			return;	
-    	}
-		window.location = "mobilePhoto.do?section=" + (parseInt(section) - 1);
-    };
-    var nextPage = function() {
-    	var section = getQueryString("section");
-    	
-    	if (Math.ceil("${allNum}" / 12) == section) {
-			alert("已经是最后一页了!");
-    		return;
-    	}
-		window.location = "mobilePhoto.do?section=" + (parseInt(section) + 1);
-    };
-
-    
+    addEvent("shouye", "mobileMain.do");
     </script>
 </body>
 </html>

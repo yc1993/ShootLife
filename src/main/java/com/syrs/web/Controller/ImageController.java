@@ -68,7 +68,7 @@ public class ImageController {
 	@Resource
 	User user;
 	
-	private static final String IP = "http://106.14.220.94";
+	private static final String IP = "http://www.youyougirl.com";
 	private static final int lENGTH = 12;
 	
 	//测试用
@@ -497,7 +497,7 @@ public class ImageController {
 	public String mobileMain(HttpSession session ,ModelMap map, HttpServletRequest request){
 		
 		//主页写真
-		List<MainImgShowModel> photoList = newShootService.mobileMainData(4);
+		List<MainImgShowModel> photoList = newShootService.mobileMainData(0, 8);
 		map.put("photoList", photoList);
 		
 		//新闻
@@ -508,13 +508,42 @@ public class ImageController {
 	}
 	
 	@RequestMapping(value="mobilePhoto", method=RequestMethod.GET)
-	public String mobilePhoto(HttpSession session ,ModelMap map, HttpServletRequest request){
+	public String mobilePhoto(HttpSession session ,ModelMap map, HttpServletRequest request, Integer section){
+		//主页写真
+		List<MainImgShowModel> photoList = newShootService.mobileMainData(section - 1, 12);
+		map.put("photoList", photoList);
+		map.put("MyIP", IP);
+		map.put("allNum", yellowListDao.getNum());
+		List<NewsList> randNewsList = newsListDao.getListRand(4);
+		map.put("randNewsList", randNewsList);
 		return "JSP/mobile/photo.jsp";
 	}
 
 	@RequestMapping(value="mobileNews", method=RequestMethod.GET)
-	public String mobileNews(){
+	public String mobileNews(HttpSession session ,ModelMap map, HttpServletRequest request, Integer section){
+		System.out.println(section + "###");
+		List<NewsList> newsList = newsListDao.getList(section - 1, 12);
+		map.put("newsList", newsList);
+		map.put("MyIP", IP);
+		map.put("allNum", newsListDao.getNum());
 		return "JSP/mobile/news.jsp";
+	}
+	
+	@RequestMapping(value="mobileRP", method=RequestMethod.GET)
+	public String mobileReadPhoto(HttpSession session ,ModelMap map, HttpServletRequest request){
+		List<String> list = new ArrayList<String>();
+		List<YellowImg> yellowImgs = yellowListDao.getImg(Integer.parseInt(request.getParameter("index")));
+		for (YellowImg yellowImg : yellowImgs) {
+			list.add(IP + yellowImg.getPath());
+		}
+		YellowList yellowList = yellowListDao.getList(Integer.parseInt(request.getParameter("index")));
+		String title = yellowList.getTitle();
+		
+		map.put("title", title);
+		map.put("list", list);
+		
+		
+		return "JSP/mobile/readPhoto.jsp";
 	}
 	
 	public static void main(String args[]){

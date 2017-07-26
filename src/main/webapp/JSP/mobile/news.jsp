@@ -40,10 +40,10 @@
 			        <a id="shouye" class="tableCell" href="mobileMain.do" target="_self" style="color: #FFFFFF;">首页</a>
 			    </li>
 			    <li class="mui-table-view-cell">
-			        <a id="xiezhen" class="tableCell" href="mobilePhoto.do" target="_self" style="color: #FFFFFF;">写真</a>
+			        <a id="xiezhen" class="tableCell" href="mobilePhoto.do?section=1" target="_self" style="color: #FFFFFF;">写真</a>
 			    </li>
 			    <li class="mui-table-view-cell">
-			        <a id="xinwen" class="tableCell" href="#" target="_self" style="color: #FFFFFF;">新闻</a>
+			        <a id="xinwen" class="tableCell" href="mobileNews.do?section=1" target="_self" style="color: #FFFFFF;">新闻</a>
 			    </li>
 			</ul>
           </div>
@@ -56,44 +56,26 @@
           <a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left" href="#offCanvasSide"></a>
           <h1 class="mui-title">新闻</h1>
         </header>
-        
         <div class="mui-content mui-scroll-wrapper">
           <div class="mui-scroll">
             <!-- 主界面具体展示内容 -->
             <ul class="mui-table-view">
-                <li class="mui-table-view-cell mui-media">
-                    <a href="javascript:;">
-                        <img class="mui-media-object mui-pull-left" src="http://placehold.it/40x30">
-                        <div class="mui-media-body">
-                            幸福
-                            <p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
-                        </div>
-                    </a>
-                </li>
-                <li class="mui-table-view-cell mui-media">
-                    <a href="javascript:;">
-                        <img class="mui-media-object mui-pull-left" src="http://placehold.it/40x30">
-                        <div class="mui-media-body">
-                            木屋
-                            <p class="mui-ellipsis">想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.</p>
-                        </div>
-                    </a>
-                </li>
-                <li class="mui-table-view-cell mui-media">
-                    <a href="javascript:;">
-                        <img class="mui-media-object mui-pull-left" src="http://placehold.it/40x30">
-                        <div class="mui-media-body">
-                            CBD
-                            <p class="mui-ellipsis">烤炉模式的城，到黄昏，如同打翻的调色盘一般.</p>
-                        </div>
-                    </a>
-                </li>
+            	<c:forEach items="${newsList}" var="news">
+    		    	<li class="mui-table-view-cell mui-media">
+	    		        <a href="javascript:;">
+	    		            <img class="mui-media-object mui-pull-left" src="${MyIP}${news.imgPath}">
+	    		            <div class="mui-media-body">
+	    		                <p class="mui-ellipsis">${news.title}</p>
+	    		            </div>
+	    		        </a>
+	    		    </li>
+    		    </c:forEach>
             </ul>
 			
 			<!--上下页-->
 			<div class="nextOrPrev">
-				<button type="button" class="mui-btn">上一页</button>
-				<button type="button" class="mui-btn">下一页</button>
+				<button type="button" class="mui-btn" onclick="prevPage()">上一页</button>
+				<button type="button" class="mui-btn" onclick="nextPage()">下一页</button>
 			</div>
 			<br />
           </div>
@@ -121,7 +103,27 @@
 	});
     
     addEvent("shouye", "mobileMain.do");
-    addEvent("xiezhen", "mobilePhoto.do");
+    addEvent("xiezhen", "mobilePhoto.do?section=1");
+    addEvent("xinwen", "mobileNews.do?section=1");
+    
+    var prevPage = function() {
+		var section = getQueryString("section");
+		if (1 == section) {
+			alert("已经是第一页了!");
+			return;	
+		}
+		window.location = "mobileNews.do?section=" + (parseInt(section) - 1);
+	};
+	var nextPage = function() {
+		var section = getQueryString("section");
+		console.log('&&&');
+		if (Math.ceil("${allNum}" / 12) == section) {
+			alert("已经是最后一页了!");
+			return;
+		}
+		window.location = "mobileNews.do?section=" + (parseInt(section) + 1);
+	};
+    
     </script>
 </body>
 </html>
