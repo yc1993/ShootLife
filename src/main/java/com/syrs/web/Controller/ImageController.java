@@ -521,7 +521,6 @@ public class ImageController {
 
 	@RequestMapping(value="mobileNews", method=RequestMethod.GET)
 	public String mobileNews(HttpSession session ,ModelMap map, HttpServletRequest request, Integer section){
-		System.out.println(section + "###");
 		List<NewsList> newsList = newsListDao.getList(section - 1, 12);
 		map.put("newsList", newsList);
 		map.put("MyIP", IP);

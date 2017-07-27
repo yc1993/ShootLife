@@ -70,9 +70,9 @@
           <div class="mui-scroll">
             <!-- 主界面具体展示内容 -->
             
-            <c:forEach items="${photoList}" var="photo">
+            <c:forEach items="${photoList}" var="photo" varStatus="status">
     			<div class="mui-card">
-	    			<a href="mobileRP.do?index=${photo.id}&page=1">
+	    			<a id="detail${status.index}" href="mobileRP.do?index=${photo.id}&page=1">
 						<!--页眉，放置标题-->
 						<!-- <div class="mui-card-header">页眉</div> -->
 						<!--内容区-->
@@ -137,6 +137,10 @@
     addEvent("xiezhen", "mobilePhoto.do?section=1");
     addEvent("xinwen", "mobileNews.do?section=1");
  
+    for (var int = 0; int < 12; int++) {
+		addEvent("detail" + int, $("#detail" + int).attr("href"));
+	}
+    
     var prevPage = function() {
     	var section = getQueryString("section");
     	if (1 == section) {

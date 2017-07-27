@@ -66,14 +66,14 @@
 						<!--内容区-->
 						<div class="mui-card-content"><img src="${imgPath}" width="100%" title="${title }" alt="${title }"></div>
 						<!--页脚，放置补充信息或支持的操作-->
-						<div class="mui-card-footer">${title}</div>
+						
 					</div>
 				</c:if>
 			</c:forEach>
 			<!--上下页-->
 			<div class="nextOrPrev">
-				<button type="button" class="mui-btn">上一页</button>
-				<button type="button" class="mui-btn">下一页</button>
+				<button type="button" class="mui-btn" onclick="prevPage()">上一页</button>
+				<button type="button" class="mui-btn" onclick="nextPage()">下一页</button>
 			</div>
 			<br />
 			<!--推荐新闻-->
@@ -97,13 +97,11 @@
 			        </a>
 			    </li>
 			    <li class="mui-table-view-cell mui-media">
-			        <a href="javascript:;">
 			            <img class="mui-media-object mui-pull-left" src="http://placehold.it/40x30">
 			            <div class="mui-media-body">
 			                CBD
 			                <p class="mui-ellipsis">烤炉模式的城，到黄昏，如同打翻的调色盘一般.</p>
 			            </div>
-			        </a>
 			    </li>
 			</ul>
 			
@@ -128,7 +126,24 @@
 		});
 	});
     
-    addEvent("shouye", "mobileMain.do?section=1");
+    var prevPage = function() {
+    	var page = getQueryString("page");
+    	if (1 == page) {
+			return;	
+    	}
+		window.location = "mobileRP.do?index=" + getQueryString("index") + "&page=" + (parseInt(page) - 1);
+    };
+    var nextPage = function() {
+    	var page = getQueryString("page");
+    	if (parseInt("${list.size()}") == parseInt(page) + 1) {
+    		window.location = "mobileRP.do?index=" + (getQueryString("index") - 1) + "&page=1";
+    	}else {
+			window.location = "mobileRP.do?index=" + getQueryString("index") + "&page=" + (parseInt(page) + 1);
+    	}
+
+    };
+    
+    addEvent("xiezhen", "mobilePhoto.do?section=1");
     addEvent("xinwen", "mobileNews.do?section=1");
     addEvent("shouye", "mobileMain.do");
     </script>

@@ -66,9 +66,9 @@
 			    <li class="mui-table-view-cell">
 	    			<!--写真-->
 		    		<h4 >美女写真</h4>
-		    		<c:forEach items="${photoList}" var="photo">
+		    		<c:forEach items="${photoList}" var="photo" varStatus="status">
 		    			<div class="mui-card">
-			    			<a href="mobileRP.do?index=${photo.id}&page=1">
+			    			<a id="detail${status.index}" href="mobileRP.do?index=${photo.id}&page=1">
 								<!--页眉，放置标题-->
 								<!-- <div class="mui-card-header">页眉</div> -->
 								<!--内容区-->
@@ -127,7 +127,9 @@
 		
 		
 	});
-
+	for (var int = 0; int < 8; int++) {
+		addEvent("detail" + int, $("#detail" + int).attr("href"));
+	}
 	addEvent("xiezhen", "mobilePhoto.do?section=1");
 	addEvent("xinwen", "mobileNews.do?section=1");
 	addEvent("shouye", "mobileMain.do");
