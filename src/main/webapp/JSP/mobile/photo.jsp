@@ -100,9 +100,9 @@
 			<br />
 			<!--随机新闻-->
 			<ul class="mui-table-view">
-			    <c:forEach items="${randNewsList}" var="news">
+			    <c:forEach items="${randNewsList}" var="news" varStatus="status">
     		    	<li class="mui-table-view-cell mui-media">
-	    		        <a href="javascript:;">
+	    		        <a id="news${status.index}" href="mobileRNews.do?title=${news.title}&index=${news.id}&createTime=${news.createTime}">
 	    		            <img class="mui-media-object mui-pull-left" src="${MyIP}${news.imgPath}">
 	    		            <div class="mui-media-body">
 	    		                <p class="mui-ellipsis">${news.title}</p>
@@ -137,10 +137,12 @@
     addEvent("xiezhen", "mobilePhoto.do?section=1");
     addEvent("xinwen", "mobileNews.do?section=1");
  
-    for (var int = 0; int < 12; int++) {
+    for (var int = 0; int < parseInt("${photoList.size()}"); int++) {
 		addEvent("detail" + int, $("#detail" + int).attr("href"));
 	}
-    
+    for (var int = 0; int < 4; int++) {
+		addEvent("news" + int, $("#news" + int).attr("href"));
+	}
     var prevPage = function() {
     	var section = getQueryString("section");
     	if (1 == section) {

@@ -60,9 +60,9 @@
           <div class="mui-scroll">
             <!-- 主界面具体展示内容 -->
             <ul class="mui-table-view">
-            	<c:forEach items="${newsList}" var="news">
+            	<c:forEach items="${newsList}" var="news" varStatus="status">
     		    	<li class="mui-table-view-cell mui-media">
-	    		        <a href="javascript:;">
+	    		        <a id="news${status.index}" href="mobileRNews.do?title=${news.title}&index=${news.id}&createTime=${news.createTime}">
 	    		            <img class="mui-media-object mui-pull-left" src="${MyIP}${news.imgPath}">
 	    		            <div class="mui-media-body">
 	    		                <p class="mui-ellipsis">${news.title}</p>
@@ -105,7 +105,9 @@
     addEvent("shouye", "mobileMain.do");
     addEvent("xiezhen", "mobilePhoto.do?section=1");
     addEvent("xinwen", "mobileNews.do?section=1");
-    
+    for (var int = 0; int < parseInt("${newsList.size()}"); int++) {
+		addEvent("news" + int, $("#news" + int).attr("href"));
+	}
     var prevPage = function() {
 		var section = getQueryString("section");
 		if (1 == section) {
@@ -116,7 +118,6 @@
 	};
 	var nextPage = function() {
 		var section = getQueryString("section");
-		console.log('&&&');
 		if (Math.ceil("${allNum}" / 12) == section) {
 			alert("已经是最后一页了!");
 			return;

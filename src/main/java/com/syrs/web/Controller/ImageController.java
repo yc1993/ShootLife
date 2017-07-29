@@ -1,5 +1,6 @@
 package com.syrs.web.Controller;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -540,9 +541,34 @@ public class ImageController {
 		
 		map.put("title", title);
 		map.put("list", list);
-		
-		
+		List<NewsList> randNewsList = newsListDao.getListRand(3);
+		map.put("randNewsList", randNewsList);
+		map.put("MyIP", IP);
 		return "JSP/mobile/readPhoto.jsp";
+	}
+	
+
+	@RequestMapping(value="mobileRNews", method=RequestMethod.GET)
+	public String mobileReadNews(HttpSession session ,ModelMap map, HttpServletRequest request, String title, Integer index, String createTime){
+		map.put("title", title);
+		List<NewsListImgAndContent> newsContentList = newsListDao.getLisContent(index);
+		List<NewsListImgAndContent> newsImgList = newsListDao.getLisImg(index);
+		List<NewsList> randNewsList = newsListDao.getListRand(4);
+		map.put("randNewsList", randNewsList);
+		Map<Integer, NewsListImgAndContent> newsMap = new HashMap<>();
+		for (NewsListImgAndContent newsContent : newsContentList) {
+			newsMap.put(newsContent.getNum(), newsContent);
+		}
+		for (NewsListImgAndContent newsImg : newsImgList) {
+			newsMap.put(newsImg.getNum(), newsImg);
+		}
+		map.put("newsMap", newsMap);
+		map.put("MyIP", IP);
+		map.put("createTime", createTime);
+		
+		int count = newsListDao.getNum();
+		map.put("count", count);
+		return "JSP/mobile/readNews.jsp";
 	}
 	
 	public static void main(String args[]){

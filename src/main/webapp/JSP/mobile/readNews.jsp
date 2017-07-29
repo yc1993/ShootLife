@@ -8,7 +8,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>${title}</title>
+    <title>Document</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <link rel="stylesheet" type="text/css" href="dist/css/mui.css"/>
 	<script type="text/javascript" src="JS/jquery-3.2.1.min.js"></script>
@@ -18,10 +18,11 @@
 		}
 		.nextOrPrev {
 			text-align: center;
+			margin-top: 10px;
 		}
 		.mui-btn {
-			margin-left: 10%;
-			margin-right: 10%;
+			margin-left: 8%;
+			margin-right: 8%;
 		}
 	</style>
 </head>
@@ -53,30 +54,25 @@
         <!-- 主页面标题 -->
         <header class="mui-bar mui-bar-nav">
           <a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left" href="#offCanvasSide"></a>
-          <h1 class="mui-title">${title}</h1>
+          <h1 class="mui-title">新闻</h1>
         </header>
-        
         <div class="mui-content mui-scroll-wrapper">
           <div class="mui-scroll">
             <!-- 主界面具体展示内容 -->
-            
-            <c:forEach items="${list }" var="imgPath" varStatus="status">
-				<c:if test="${param.page eq status.index }">
-					<div class="mui-card">
-						<!--内容区-->
-						<div class="mui-card-content"><img src="${imgPath}" width="100%" title="${title }" alt="${title }"></div>
-						<!--页脚，放置补充信息或支持的操作-->
-						
-					</div>
-				</c:if>
-			</c:forEach>
-			<!--上下页-->
-			<div class="nextOrPrev">
-				<button type="button" class="mui-btn" onclick="prevPage()">上一页</button>
-				<button type="button" class="mui-btn" onclick="nextPage()">下一页</button>
-			</div>
+            <ul class="mui-table-view">
+            	<br>
+            	<h3 align="center">${title}<br><br><small>${createTime}</small></h3>
+				<c:forEach items="${newsMap}" var="news" varStatus="status">
+					<c:if test="${news.value.path == null}">
+						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${news.value.content}</p>
+					</c:if>
+					<c:if test="${news.value.path != null}">
+						<img style="display: block; width: 100%" alt="图片" src="${MyIP}${news.value.path}">
+					</c:if>
+				</c:forEach>
+            </ul>
+			
 			<br />
-			<!--推荐新闻-->
 			<ul class="mui-table-view">
 			    <c:forEach items="${randNewsList}" var="news" varStatus="status">
     		    	<li class="mui-table-view-cell mui-media">
@@ -89,12 +85,14 @@
 	    		    </li>
     		    </c:forEach>
 			</ul>
-			
           </div>
+          
         </div>  
         <div class="mui-off-canvas-backdrop"></div>
       </div>
     </div>
+    
+    
     <script src="dist/js/mui.js" type="text/javascript" charset="utf-8"></script>
     <script src="JS/common.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
@@ -110,29 +108,14 @@
 			bounce: true //是否启用回弹
 		});
 	});
-    for (var int = 0; int < 3; int++) {
-		addEvent("news" + int, $("#news" + int).attr("href"));
-	}
-    var prevPage = function() {
-    	var page = getQueryString("page");
-    	if (1 == page) {
-			return;	
-    	}
-		window.location = "mobileRP.do?index=" + getQueryString("index") + "&page=" + (parseInt(page) - 1);
-    };
-    var nextPage = function() {
-    	var page = getQueryString("page");
-    	if (parseInt("${list.size()}") == parseInt(page) + 1) {
-    		window.location = "mobileRP.do?index=" + (getQueryString("index") - 1) + "&page=1";
-    	}else {
-			window.location = "mobileRP.do?index=" + getQueryString("index") + "&page=" + (parseInt(page) + 1);
-    	}
-
-    };
     
+    addEvent("shouye", "mobileMain.do");
     addEvent("xiezhen", "mobilePhoto.do?section=1");
     addEvent("xinwen", "mobileNews.do?section=1");
-    addEvent("shouye", "mobileMain.do");
+    for (var int = 0; int < 4; int++) {
+		addEvent("news" + int, $("#news" + int).attr("href"));
+	}
+    
     </script>
 </body>
 </html>

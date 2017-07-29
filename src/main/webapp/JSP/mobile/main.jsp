@@ -27,6 +27,12 @@
 			font-size: 12px;
 			padding: 0px 2px;
 		}
+		.mui-btn {
+			margin: 5px auto 0px auto;
+			width: 60%;
+			display: block;
+			
+		}
 	</style>
 </head>
 <body>
@@ -78,23 +84,17 @@
 							</a>
 						</div>
 		    		</c:forEach>
-<!-- 		    		
-		    		<div class="mui-card">
-		    			<a id="special" href="www.baidu.com">
-							<div class="mui-card-header">页眉</div>
-							<div class="mui-card-content"><img src="image/1.jpeg" width="100%"></div>
-							<div class="mui-card-footer">测试</div>
-						</a>
-					</div> -->
-
 			    </li>
+			    <div>
+			   		<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined" onclick="showMorePhoto()">显示更多美女写真</button>
+			    </div>
 			    <li class="mui-table-view-cell">
 			    		<h4 >热点新闻</h4>
 			    		<ul class="mui-table-view">
 			    		    
-			    		    <c:forEach items="${newsList}" var="news">
+			    		    <c:forEach items="${newsList}" var="news" varStatus="status">
 			    		    	<li class="mui-table-view-cell mui-media">
-			    		        <a href="javascript:;">
+			    		        <a id="news${status.index}" href="mobileRNews.do?title=${news.title}&index=${news.id}&createTime=${news.createTime}">
 			    		            <img class="mui-media-object mui-pull-left" src="${MyIP}${news.imgPath}">
 			    		            <div class="mui-media-body">
 			    		                <p class="mui-ellipsis">${news.title}</p>
@@ -104,6 +104,9 @@
 			    		    </c:forEach>
 			    		</ul>
 			    </li>
+			    <div>
+			   		<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined" onclick="showMoreNews()">显示更多热点新闻</button><br>
+			    </div>
 			</ul>  
           </div>
         </div>  
@@ -130,9 +133,19 @@
 	for (var int = 0; int < 8; int++) {
 		addEvent("detail" + int, $("#detail" + int).attr("href"));
 	}
+	for (var int = 0; int < 4; int++) {
+		addEvent("news" + int, $("#news" + int).attr("href"));
+	}
 	addEvent("xiezhen", "mobilePhoto.do?section=1");
 	addEvent("xinwen", "mobileNews.do?section=1");
 	addEvent("shouye", "mobileMain.do");
+	
+	var showMorePhoto = function() {
+		window.location = "mobilePhoto.do?section=1";
+	};
+	var showMoreNews = function() {
+		window.location = "mobileNews.do?section=1";
+	};
     </script>
 </body>
 </html>
