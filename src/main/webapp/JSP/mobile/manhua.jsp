@@ -8,7 +8,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>少女写真</title>
+    <title>深夜漫画</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <link rel="stylesheet" type="text/css" href="dist/css/mui.css"/>
 	<script type="text/javascript" src="JS/jquery-3.2.1.min.js"></script>
@@ -46,35 +46,26 @@
         <!-- 主页面标题 -->
         <header class="mui-bar mui-bar-nav">
           <a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left" href="#offCanvasSide"></a>
-          <h1 class="mui-title">写真</h1>
+          <h1 class="mui-title">深夜漫画</h1>
         </header>
         
         <div class="mui-content mui-scroll-wrapper">
           <div class="mui-scroll">
             <!-- 主界面具体展示内容 -->
             
-            <c:forEach items="${photoList}" var="photo" varStatus="status">
+            <c:forEach items="${manhuaList}" var="manhua" varStatus="status">
     			<div class="mui-card">
-	    			<a id="detail${status.index}" href="mobileRP.do?index=${photo.id}&page=1">
+	    			<a id="detail${status.index}" href="mobileRManhua.do?index=${manhua.id}&page=1">
 						<!--页眉，放置标题-->
 						<!-- <div class="mui-card-header">页眉</div> -->
 						<!--内容区-->
-						<div class="mui-card-content"><img src="${MyIP}${photo.path}${photo.imgName}" width="100%"></div>
+						<div class="mui-card-content" style="width: 100%; padding-bottom: 131%; height: 0;position: relative; overflow: hidden;"><img src="${MyIP}${manhua.path}${manhua.imgName}" style="width: 100%; height: 100%;position: absolute;"></div>
 						<!--页脚，放置补充信息或支持的操作-->
-						<div class="mui-card-footer">${photo.title}</div>
+						<div class="mui-card-footer">${manhua.title}</div>
 					</a>
 				</div>
     		</c:forEach>
             
-			<!-- <div class="mui-card">
-				页眉，放置标题
-				<div class="mui-card-header">页眉</div>
-				内容区
-				<div class="mui-card-content"><img src="image/3.jpeg" width="100%"></div>
-				页脚，放置补充信息或支持的操作
-				<div class="mui-card-footer">页脚</div>
-			</div> -->
-			
 			<!--上下页-->
 			<div class="nextOrPrev">
 				<button type="button" class="mui-btn" onclick="prevPage()">上一页</button>
@@ -128,7 +119,7 @@
     		alert("已经是第一页了!");
 			return;	
     	}
-		window.location = "mobilePhoto.do?section=" + (parseInt(section) - 1);
+		window.location = "mobileManhua.do?section=" + (parseInt(section) - 1);
     };
     var nextPage = function() {
     	var section = getQueryString("section");
@@ -137,7 +128,7 @@
 			alert("已经是最后一页了!");
     		return;
     	}
-		window.location = "mobilePhoto.do?section=" + (parseInt(section) + 1);
+		window.location = "mobileManhua.do?section=" + (parseInt(section) + 1);
     };
 
     

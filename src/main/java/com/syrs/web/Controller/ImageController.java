@@ -500,7 +500,9 @@ public class ImageController {
 		//主页写真
 		List<MainImgShowModel> photoList = newShootService.mobileMainData(0, 8);
 		map.put("photoList", photoList);
-		
+		//漫画
+		List<ManhuaList> manhuaList = manhuaListDao.getList(0, 8);
+		map.put("manhuaList", manhuaList);
 		//新闻
 		List<NewsList> newsList = newsListDao.getList(0, 4);
 		map.put("newsList", newsList);
@@ -520,6 +522,18 @@ public class ImageController {
 		return "JSP/mobile/photo.jsp";
 	}
 
+	@RequestMapping(value="mobileManhua", method=RequestMethod.GET)
+	public String mobileManhua(HttpSession session ,ModelMap map, HttpServletRequest request, Integer section) {
+		//漫画
+		List<ManhuaList> manhuaList = manhuaListDao.getList(section - 1, 8);
+		map.put("manhuaList", manhuaList);
+		map.put("MyIP", IP);
+		map.put("allNum", manhuaListDao.getNum());
+		List<NewsList> randNewsList = newsListDao.getListRand(4);
+		map.put("randNewsList", randNewsList);
+		return "JSP/mobile/manhua.jsp";
+	}
+	
 	@RequestMapping(value="mobileNews", method=RequestMethod.GET)
 	public String mobileNews(HttpSession session ,ModelMap map, HttpServletRequest request, Integer section){
 		List<NewsList> newsList = newsListDao.getList(section - 1, 12);
@@ -547,6 +561,10 @@ public class ImageController {
 		return "JSP/mobile/readPhoto.jsp";
 	}
 	
+	@RequestMapping(value="mobileRP", method=RequestMethod.GET)
+	public String mobileReadManhua(HttpSession session ,ModelMap map, HttpServletRequest request, Integer index, Integer words){
+		
+	}
 
 	@RequestMapping(value="mobileRNews", method=RequestMethod.GET)
 	public String mobileReadNews(HttpSession session ,ModelMap map, HttpServletRequest request, String title, Integer index, String createTime){

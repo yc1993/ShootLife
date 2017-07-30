@@ -25,7 +25,7 @@ public class ManhuaListDao {
 		ArrayList<ManhuaList> manhuaLists = new ArrayList<>();
 		try {
 			jdbc = new JDBC();
-	   		jdbc.sql = "SELECT * FROM manhua_list ORDER BY CREATE_TIME DESC LIMIT " + index*lenth + ", " + lenth + ";";
+	   		jdbc.sql = "SELECT * FROM manhua_list ORDER BY ID DESC LIMIT " + index*lenth + ", " + lenth + ";";
 			jdbc.noParamsQuery();
 	   		while(jdbc.rs.next()){
 				ManhuaList manhuaList = new ManhuaList();

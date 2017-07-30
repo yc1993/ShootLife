@@ -15,3 +15,7 @@ function getQueryString(name) {
 		return unescape(r[2]); 
 	return null; 
 } 
+addEvent("xiezhen", "mobilePhoto.do?section=1");
+addEvent("xinwen", "mobileNews.do?section=1");
+addEvent("manhua", "mobileManhua.do?section=1")
+addEvent("shouye", "mobileMain.do");

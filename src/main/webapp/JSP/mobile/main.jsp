@@ -40,23 +40,7 @@
     <!-- 侧滑导航根容器 -->
     <div class="mui-off-canvas-wrap mui-draggable mui-slide-in">
       <!-- 菜单容器 -->
-      <aside class="mui-off-canvas-left" id="offCanvasSide">
-        <div class="mui-scroll-wrapper">
-          <div class="mui-scroll">
-        		<ul class="mui-table-view">
-			    <li class="mui-table-view-cell">
-			        <a id="shouye" class="tableCell" href="#" target="_self" style="color: #FFFFFF;">首页</a>
-			    </li>
-			    <li class="mui-table-view-cell">
-			        <a id="xiezhen" class="tableCell" href="mobilePhoto.do?section=1" target="_self" style="color: #FFFFFF;">写真</a>
-			    </li>
-			    <li class="mui-table-view-cell">
-			        <a id="xinwen" class="tableCell" href="mobileNews.do?section=1" target="_self" style="color: #FFFFFF;">新闻</a>
-			    </li>
-			</ul>
-          </div>
-        </div>
-      </aside>
+      <c:import url="menu.jsp"></c:import>
       <!-- 主页面容器 -->
       <div class="mui-inner-wrap">
         <!-- 主页面标题 -->
@@ -87,6 +71,20 @@
 			    </li>
 			    <div>
 			   		<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined" onclick="showMorePhoto()">显示更多美女写真</button>
+			    </div>
+			     <li class="mui-table-view-cell">
+			     	<h4 >深夜漫画😊</h4>
+			     	<c:forEach items="${manhuaList}" var="manhua" varStatus="status">
+			     		<div class="mui-card">
+			     			<a id="manhua${status.index}" href="mobileRP.do?index=${photo.id}&page=1&words=1">
+			     				<div class="mui-card-content"><img src="${MyIP}${manhua.path}${manhua.imgName}" width="100%"></div>
+			     				<div class="mui-card-footer">${manhua.title}</div>
+			     			</a>
+			     		</div>
+			     	</c:forEach>
+			     </li>
+			     <div>
+			   		<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined" onclick="showMoreManhua()">显示更多漫画</button>
 			    </div>
 			    <li class="mui-table-view-cell">
 			    		<h4 >热点新闻</h4>
@@ -136,9 +134,6 @@
 	for (var int = 0; int < 4; int++) {
 		addEvent("news" + int, $("#news" + int).attr("href"));
 	}
-	addEvent("xiezhen", "mobilePhoto.do?section=1");
-	addEvent("xinwen", "mobileNews.do?section=1");
-	addEvent("shouye", "mobileMain.do");
 	
 	var showMorePhoto = function() {
 		window.location = "mobilePhoto.do?section=1";

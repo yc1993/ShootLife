@@ -31,24 +31,7 @@
     <!-- 侧滑导航根容器 -->
     <div class="mui-off-canvas-wrap mui-draggable mui-slide-in">
       <!-- 菜单容器 -->
-      <aside class="mui-off-canvas-left" id="offCanvasSide">
-        <div class="mui-scroll-wrapper">
-          <div class="mui-scroll">
-            <!-- 菜单具体展示内容 -->
-            <ul class="mui-table-view">
-			    <li class="mui-table-view-cell">
-			        <a id="shouye" class="tableCell" href="mobileMain.do" target="_self" style="color: #FFFFFF;">首页</a>
-			    </li>
-			    <li class="mui-table-view-cell">
-			        <a id="xiezhen" class="tableCell" href="mobilePhoto.do?section=1" target="_self" style="color: #FFFFFF;">写真</a>
-			    </li>
-			    <li class="mui-table-view-cell">
-			        <a id="xinwen" class="tableCell" href="mobileNews.do?section=1" target="_self" style="color: #FFFFFF;">新闻</a>
-			    </li>
-			</ul>
-          </div>
-        </div>
-      </aside>
+      <c:import url="menu.jsp"></c:import>
       <!-- 主页面容器 -->
       <div class="mui-inner-wrap">
         <!-- 主页面标题 -->
@@ -64,10 +47,10 @@
             	<h3 align="center">${title}<br><br><small>${createTime}</small></h3>
 				<c:forEach items="${newsMap}" var="news" varStatus="status">
 					<c:if test="${news.value.path == null}">
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${news.value.content}</p>
+						<p style="padding: 0 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${news.value.content}</p>
 					</c:if>
 					<c:if test="${news.value.path != null}">
-						<img style="display: block; width: 100%" alt="图片" src="${MyIP}${news.value.path}">
+						<img style="display: block; width: 100%; padding: 0 8px;" alt="图片" src="${MyIP}${news.value.path}">
 					</c:if>
 				</c:forEach>
             </ul>
