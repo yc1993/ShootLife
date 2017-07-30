@@ -89,6 +89,9 @@ public class ImageController {
 //		user1.setPassword("333333");
 //		
 //		request.setAttribute("user1", user1);
+		int i;
+		i  = 10 ;
+		
 		
 		
 		if (request.getAttribute("count") != null) {
