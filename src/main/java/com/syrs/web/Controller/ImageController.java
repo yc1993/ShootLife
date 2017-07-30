@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.syrs.web.DAO.CountDao;
 import com.syrs.web.DAO.FaceListDao;
 import com.syrs.web.DAO.ManhuaListDao;
 import com.syrs.web.DAO.NewsListDao;
@@ -65,6 +66,9 @@ public class ImageController {
 	
 	@Resource
 	FaceListDao faceListDao;
+	
+	@Resource
+	CountDao CountDao;
 	
 	@Resource
 	User user;
@@ -255,6 +259,9 @@ public class ImageController {
 		ArrayList<MainImgShowModel> recommendList = (ArrayList<MainImgShowModel>) newShootService.yellowList2MainImgShowModel(yellowListDao.getListRand(6));
 		mav.getModelMap().put("recommendList",recommendList);
 		
+		//统计点击次数
+		CountDao.setCount(0, 0, 1);
+		
 		return mav;
 	}
 	
@@ -262,13 +269,10 @@ public class ImageController {
 	public String secondPage(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap modelMap){
 		
 		// 判断点击的是哪个标签
-//		ArrayList<SecondImgAryModel> imgList = new ArrayList<>();
 		List<String> list = new ArrayList<String>();
-//		String tableName = null;
 		String title = null;
 		switch (request.getParameter("target")) {
 		case "1": {
-//			imgList = (ArrayList<SecondImgAryModel>) shootService.backSecondImgList(request.getParameter("index"));	
 			List<YellowImg> yellowImgs = yellowListDao.getImg(Integer.parseInt(request.getParameter("index")));
 			for (YellowImg yellowImg : yellowImgs) {
 				list.add(IP + yellowImg.getPath());
@@ -276,18 +280,19 @@ public class ImageController {
 			YellowList yellowList = yellowListDao.getList(Integer.parseInt(request.getParameter("index")));
 			title = yellowList.getTitle();
 //			tableName = "yellow_list";
+			if(request.getParameter("page") == null){
+				CountDao.setCount(1, Integer.parseInt(request.getParameter("index")), 1);
+			}
 		}
 			break;
 		case "2": {
-//			imgList = (ArrayList<SecondImgAryModel>) shootService.backManHuaImgList(request.getParameter("index"),"1");
-			List<ManhuaImg> manhuaImgs = manhuaListDao.getListImg(1, Integer.parseInt(request.getParameter("index")));
-			for (ManhuaImg manhuaImg : manhuaImgs) {
-				list.add(IP + manhuaImg.getPath());
-			}
-			ManhuaList manhuaList = manhuaListDao.getList(Integer.parseInt(request.getParameter("index")));
-			title = manhuaList.getTitle();
-//			tableName = "manhua_list";
-			
+//			List<ManhuaImg> manhuaImgs = manhuaListDao.getListImg(1, Integer.parseInt(request.getParameter("index")));
+//			for (ManhuaImg manhuaImg : manhuaImgs) {
+//				list.add(IP + manhuaImg.getPath());
+//			}
+//			ManhuaList manhuaList = manhuaListDao.getList(Integer.parseInt(request.getParameter("index")));
+//			title = manhuaList.getTitle();
+
 		}
 			break;
 		case "3": {
@@ -299,6 +304,9 @@ public class ImageController {
 			FaceList faceList = faceListDao.getList(Integer.parseInt(request.getParameter("index")));
 			title = faceList.getTitle();
 //			tableName = "face_list";
+			if(request.getParameter("page") == null){
+				CountDao.setCount(4, Integer.parseInt(request.getParameter("index")), 1);
+			}
 		}
 			break;
 
@@ -373,6 +381,7 @@ public class ImageController {
 		//session中的number记录查看当前图集是第几页
 		if (request.getParameter("page") == null || session.getAttribute("number") == request.getParameter("page") || session.getAttribute("number") == null) {
 			session.setAttribute("number", "0");
+			CountDao.setCount(2, Integer.parseInt(request.getParameter("index")), 1);
 		}else {
 			session.setAttribute("number", request.getParameter("page"));
 		}
@@ -468,12 +477,13 @@ public class ImageController {
 		for (NewsListImgAndContent newsImg : newsImgList) {
 			newsMap.put(newsImg.getNum(), newsImg);
 		}
-		
+
+		CountDao.setCount(3, Integer.parseInt(request.getParameter("id")), 1);
 		map.put("randNewsTitle", randNewsTitle);
 		map.put("newsMap", newsMap);
 		map.put("newsTitle", newsTitle);
 		map.put("createTime", createTime);
-		map.put("MyIP", IP);
+		map.put("MyIP", IP);		
 		return "JSP/ReadNews.jsp";
 	}
 	
@@ -499,7 +509,8 @@ public class ImageController {
 	
 	@RequestMapping(value="mobileMain", method=RequestMethod.GET)
 	public String mobileMain(HttpSession session ,ModelMap map, HttpServletRequest request){
-		
+		//统计点击次数
+		CountDao.setCount(0, 0, 0);
 		//主页写真
 		List<MainImgShowModel> photoList = newShootService.mobileMainData(0, 8);
 		map.put("photoList", photoList);
@@ -541,6 +552,10 @@ public class ImageController {
 		}
 		YellowList yellowList = yellowListDao.getList(Integer.parseInt(request.getParameter("index")));
 		String title = yellowList.getTitle();
+		System.out.println(request.getParameter("page") );
+		if((request.getParameter("page")).equals("1")){
+			CountDao.setCount(1, Integer.parseInt(request.getParameter("index")), 0);
+		}
 		
 		map.put("title", title);
 		map.put("list", list);
@@ -565,6 +580,11 @@ public class ImageController {
 		for (NewsListImgAndContent newsImg : newsImgList) {
 			newsMap.put(newsImg.getNum(), newsImg);
 		}
+		
+
+		CountDao.setCount(3, Integer.parseInt(request.getParameter("index")), 0);
+
+		
 		map.put("newsMap", newsMap);
 		map.put("MyIP", IP);
 		map.put("createTime", createTime);
