@@ -141,6 +141,9 @@
 	var showMoreNews = function() {
 		window.location = "mobileNews.do?section=1";
 	};
+	var showMoreManhua = function() {
+		window.location = "mobileManhua.do?section=1";
+	};
     </script>
 </body>
 </html>
