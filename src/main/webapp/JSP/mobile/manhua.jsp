@@ -55,11 +55,11 @@
             
             <c:forEach items="${manhuaList}" var="manhua" varStatus="status">
     			<div class="mui-card">
-	    			<a id="detail${status.index}" href="mobileRManhua.do?index=${manhua.id}&page=1">
+	    			<a id="detail${status.index}" href="mobileRManhua.do?index=${manhua.id}&page=1&words=1">
 						<!--页眉，放置标题-->
 						<!-- <div class="mui-card-header">页眉</div> -->
 						<!--内容区-->
-						<div class="mui-card-content" style="width: 100%; padding-bottom: 131%; height: 0;position: relative; overflow: hidden;"><img src="${MyIP}${manhua.path}${manhua.imgName}" style="width: 100%; height: 100%;position: absolute;"></div>
+						<div class="mui-card-content" style="width: 100%; padding-bottom: 131%; height: 0;"><img src="${MyIP}${manhua.path}${manhua.imgName}" style="width: 100%; height: 100%;position: absolute;"></div>
 						<!--页脚，放置补充信息或支持的操作-->
 						<div class="mui-card-footer">${manhua.title}</div>
 					</a>
@@ -107,7 +107,7 @@
 		});
 	});
  
-    for (var int = 0; int < parseInt("${photoList.size()}"); int++) {
+    for (var int = 0; int < parseInt("${manhuaList.size()}"); int++) {
 		addEvent("detail" + int, $("#detail" + int).attr("href"));
 	}
     for (var int = 0; int < 4; int++) {

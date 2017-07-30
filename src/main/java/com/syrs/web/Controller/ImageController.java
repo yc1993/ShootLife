@@ -564,9 +564,35 @@ public class ImageController {
 		return "JSP/mobile/readPhoto.jsp";
 	}
 	
-	@RequestMapping(value="mobileRP", method=RequestMethod.GET)
-	public String mobileReadManhua(HttpSession session ,ModelMap map, HttpServletRequest request, Integer index, Integer words){
-		
+	@RequestMapping(value="mobileRManhua", method=RequestMethod.GET)
+	public String mobileReadManhua(HttpSession session ,ModelMap map, HttpServletRequest request, Integer index, Integer words, Integer page){
+		ManhuaList manhuaList = manhuaListDao.getList(index);
+		List<PagerModel> cartoonList = new ArrayList<>();
+		for (int i = 0; i < manhuaList.getNum(); i++) {
+			PagerModel pm = new PagerModel();
+			pm.setUrl("mobileRManhua.do?index=" + request.getParameter("index") + "&page=1" + "&words=" + (i+1));
+			pm.setShowContent("第" + (i+1) + "话");
+			cartoonList.add(pm);
+		}
+		map.put("cartoonList", cartoonList);
+		ArrayList<ManhuaImg> manhuaImgs = new ArrayList<>();
+		List<String> urlList = new ArrayList<String>();
+		manhuaImgs = (ArrayList<ManhuaImg>) manhuaListDao.getListImg(words, index);
+		List<NewsList> randNewsList = newsListDao.getListRand(3);
+//		String tableName = "manhua_list";
+//		if (manhuaImgs.size() == 0) {	//如果下一图集是空，则返回下一图集的index
+//			String index = shootService.backIndexNumber(request.getParameter("index"),tableName);
+//			return "redirect:cartoon.do?target=" + request.getParameter("target") + "&index=" + index + "&words=1";
+//		}
+
+		for (ManhuaImg manhuaImg : manhuaImgs) {
+			urlList.add(IP + manhuaImg.getPath());
+		}
+		map.put("list", urlList);
+		map.put("title", manhuaList.getTitle());
+		map.put("randNewsList", randNewsList);
+		map.put("MyIP", IP);
+		return "JSP/mobile/readManhua.jsp";
 	}
 
 	@RequestMapping(value="mobileRNews", method=RequestMethod.GET)

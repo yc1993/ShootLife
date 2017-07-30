@@ -23,6 +23,17 @@
 			margin-left: 10%;
 			margin-right: 10%;
 		}
+		#selectPage {
+			padding: 0 8px;
+		}
+		.pagerContent {
+			border: solid 1px #ccc;
+			display: inline-block;
+			margin-bottom: 2px;
+			width: 20%;
+			margin-left:auto;
+			margin-right: auto; 
+		}
 	</style>
 </head>
 <body>
@@ -42,9 +53,9 @@
         <div class="mui-content mui-scroll-wrapper">
           <div class="mui-scroll">
             <!-- 主界面具体展示内容 -->
-            
+            <h4  style="padding-left: 8px;display: inline-block;">第${param.words}话-第${param.page}页</h4><span style="color: #333; font-size: 10px;">(共${list.size()}页)</span>
             <c:forEach items="${list }" var="imgPath" varStatus="status">
-				<c:if test="${param.page eq status.index }">
+				<c:if test="${param.page eq (status.index + 1) }">
 					<div class="mui-card">
 						<!--内容区-->
 						<div class="mui-card-content"><img src="${imgPath}" width="100%" title="${title }" alt="${title }"></div>
@@ -59,6 +70,17 @@
 				<button type="button" class="mui-btn" onclick="nextPage()">下一页</button>
 			</div>
 			<br />
+			<div id="selectPage">
+				<c:forEach items="${cartoonList}" var="pagerModel" varStatus="status">
+					<c:if test="${param['words'] eq status.count }">
+						<span class="pagerContent">${pagerModel.showContent}</span>
+					</c:if>
+					<c:if test="${param['words'] != status.count }">
+						<a id="page${status.index}" class="pagerContent" href="${pagerModel.url }">${pagerModel.showContent}</a>
+					</c:if>
+				</c:forEach>
+			</div>
+			<br/>
 			<!--推荐新闻-->
 			<ul class="mui-table-view">
 			    <c:forEach items="${randNewsList}" var="news" varStatus="status">
@@ -96,19 +118,27 @@
     for (var int = 0; int < 3; int++) {
 		addEvent("news" + int, $("#news" + int).attr("href"));
 	}
+    for (var int = 0; int < parseInt("${cartoonList.size()}"); int++) {
+    	if ("${param.words}" == (int + 1)) {
+    		continue;
+		}
+		addEvent("page" + int, $("#page" + int).attr("href"))
+		
+	}
     var prevPage = function() {
     	var page = getQueryString("page");
     	if (1 == page) {
 			return;	
     	}
-		window.location = "mobileRP.do?index=" + getQueryString("index") + "&page=" + (parseInt(page) - 1);
+		window.location = "mobileRManhua.do?index=" + getQueryString("index") + "&page=" + (parseInt(page) - 1) + "&words=${param.words}";
     };
     var nextPage = function() {
     	var page = getQueryString("page");
-    	if (parseInt("${list.size()}") == parseInt(page) + 1) {
-    		window.location = "mobileRP.do?index=" + (getQueryString("index") - 1) + "&page=1";
+    	if (parseInt("${list.size()}") == parseInt(page)) {
+    		alert("已经是当前话最后页");
+    		return;
     	}else {
-			window.location = "mobileRP.do?index=" + getQueryString("index") + "&page=" + (parseInt(page) + 1);
+			window.location = "mobileRManhua.do?index=" + getQueryString("index") + "&page=" + (parseInt(page) + 1 + "&words=${param.words}");
     	}
 
     };
